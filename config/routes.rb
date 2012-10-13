@@ -1,4 +1,16 @@
 Testgen::Application.routes.draw do
+  resources :anagrams
+
+  resources :grid_types
+
+  resources :grids
+
+  resources :sketches
+
+  resources :words
+
+  resources :dictionaries
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

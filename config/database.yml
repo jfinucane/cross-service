@@ -17,7 +17,7 @@ development:
   encoding: unicode
   database: testgen_development
   pool: 5
-  username: testgen
+  username: jamesfinucane
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -43,13 +43,7 @@ test:
   encoding: unicode
   database: testgen_test
   pool: 5
-  username: testgen
+  username: jamesfinucane
   password:
 
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: testgen_production
-  pool: 5
-  username: testgen
-  password:
+

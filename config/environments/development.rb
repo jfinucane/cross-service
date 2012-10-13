@@ -34,4 +34,9 @@ Testgen::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  HOST='http://localhost:3000'
+  
+  ENV["REDISTOGO_URL"] = 'redis://jimfinucane:237a1a3eb8d00156cbf75e16907377c5@herring.redistogo.com:9028' 
+
 end

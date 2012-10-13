@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Dictionary.create(name: 'sowpods',
+	              attribution: 'scrabble via norvig');
+Dictionary.create(name: 'popular',
+	              attribution: 'google popular.txt via norvig');
+Dictionary.create(name: 'sowpops',
+	              attribution: 'popular scrabble words: sowpows & popular');

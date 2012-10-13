@@ -36,3 +36,15 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+  gem 'thin'
+  gem 'capybara'
+  gem 'ruby-debug19'
+  gem 'factory_girl'
+  gem 'curb'
+  gem 'pry'
+end
+
+gem 'redis'

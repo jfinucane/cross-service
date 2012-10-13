@@ -34,4 +34,8 @@ Testgen::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  HOST='http://localhost:3000'
+  ENV["REDISTOGO_URL"] = 'redis://jimfinucane:237a1a3eb8d00156cbf75e16907377c5@herring.redistogo.com:9028' 
+
 end
