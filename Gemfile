@@ -48,3 +48,5 @@ group :test, :development do
 end
 
 gem 'redis'
+gem 'thin'
+gem 'foreman'
