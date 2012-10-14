@@ -3,6 +3,10 @@ class DictionariesController < ApplicationController
   # GET /dictionaries.json
   def index
     @dictionaries = Dictionary.all
+    @counts=[]
+    @dictionaries.each_with_index do |dict, index|
+      @counts[index] = Word.where(:processed=>1, :dictionary_id=> dict.id).count
+    end
     puts request.format
     respond_to do |format|
       format.html # index.html.erb

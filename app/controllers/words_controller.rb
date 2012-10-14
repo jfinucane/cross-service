@@ -33,4 +33,18 @@ class WordsController < ApplicationController
     end
   end
 
+
+  def api
+
+    @display_cols = 10
+    file = File.open(File.expand_path('../../../README.rdoc', __FILE__), 'r')
+    @lines = file.read.split("\n")
+    
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @lines }
+    end
+  end
+
 end

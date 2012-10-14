@@ -1,0 +1,22 @@
+<h2> Current dictionaries </h2>
+
+
+<table>
+	<tr>
+	<th>
+		<td> Name </td>
+		<td> Source </td>
+		<td> word Count </td>
+	</th>
+</tr>
+
+<%-@dictionaries.each_with_index  do |dict,index| %>
+
+   <tr>
+   	   <td></td>
+	   <td> <%=dict.name%> </td>
+	   <td> <%=dict.attribution%> </td>
+	   <td> <%= @counts[index] %> </td>
+   </tr>
+
+<%- end %>

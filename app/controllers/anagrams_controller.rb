@@ -46,6 +46,7 @@ class AnagramsController < ApplicationController
   # GET /anagrams.json/word
   def show
     dictionary_id = nil
+    @word = params['id']
     sorted_word= sort_chars params['id']
     @dict_string = params['dictionary'] || 'sowpops'
     if params['dictionary']
@@ -56,11 +57,10 @@ class AnagramsController < ApplicationController
       dictionary_id =Dictionary.where(:name=>'sowpops').first.id
     end
     anagrams_key="anag:#{dictionary_id.to_s}:#{sorted_word}"
-    js = REDIS.smembers anagrams_key
-    puts 'HOSTHOST HOST ', request.host
+    @js = REDIS.smembers anagrams_key
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: js.to_json, layout:false }
+      format.json { render json: @js.to_json, layout:false }
     end
   end   
 

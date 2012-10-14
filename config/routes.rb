@@ -1,4 +1,7 @@
 Testgen::Application.routes.draw do
+  
+  get 'words/api'
+
   resources :anagrams
 
   resources :grid_types
