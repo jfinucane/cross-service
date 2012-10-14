@@ -64,6 +64,6 @@ Testgen::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  ENV["REDISTOGO_URL"] = 'redis://jimfinucane:237a1a3eb8d00156cbf75e16907377c5@herring.redistogo.com:9028' 
-
+  #ENV["REDISTOGO_URL"] = 'redis://jimfinucane:237a1a3eb8d00156cbf75e16907377c5@herring.redistogo.com:9028' 
+   ENV["REDISTOGO_URL"] = "redis://jimfinucane:ce6ac4d0535770058cb4d25d8d499a01@bluegill.redistogo.com:9127"
 end

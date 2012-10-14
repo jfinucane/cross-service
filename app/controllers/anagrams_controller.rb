@@ -34,7 +34,7 @@ class AnagramsController < ApplicationController
       sorted= find_or_create_word(1, @anagrams['sorted_word'], @dictionary_id)
       a = Anagram.find_or_create_by_word_id_and_sorted_id(word.id, sorted.id)   
       @anagrams[:status] = 'success'
-      anagrams_key = "anagrams:#{@dict_string}:#{@anagrams['sorted_word']}"
+      anagrams_key = "anag:#{@dictionary_id.to_s}:#{@anagrams['sorted_word']}"
       REDIS.sadd anagrams_key, @anagrams['word']
     end
     
@@ -45,9 +45,17 @@ class AnagramsController < ApplicationController
   #demo purposes
   # GET /anagrams.json/word
   def show
+    dictionary_id = nil
     sorted_word= sort_chars params['id']
-    dictionary = params['dictionary'] || 'sowpops'
-    anagrams_key="anagrams:#{dictionary}:#{sorted_word}"
+    @dict_string = params['dictionary'] || 'sowpops'
+    if params['dictionary']
+       dictionary = Dictionary.where(:name=>@dict_string.downcase)
+       dictionary_id = dictionary.first.id if (dictionary && dictionary.count > 0) 
+    end
+    unless dictionary_id 
+      dictionary_id =Dictionary.where(:name=>'sowpops').first.id
+    end
+    anagrams_key="anag:#{dictionary_id.to_s}:#{sorted_word}"
     js = REDIS.smembers anagrams_key
     puts 'HOSTHOST HOST ', request.host
     respond_to do |format|

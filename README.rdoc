@@ -4,7 +4,6 @@ git push heroku master
 Modify .git after renaming app
 cross-service.herokuapp.com
 
-Evilness: git has underscore cross_service, darn
 
 heroku run bash
 rake db:create:all

@@ -19,26 +19,26 @@ describe WordsController do
     end
     
     it 'should get the test words' do
-      response = Curl.get HOST + '/words.json' 
+      response = Curl.get HOST + '/words.json?dictionary=test' 
       words = get_array response
       found_words = @words.select{|w| words.include? w} 
       found_words.sort.should == @words
     end
 
     it 'should get a page size of three' do
-      response = Curl.get HOST + '/words.json?page_size=3' 
+      response = Curl.get HOST + '/words.json?page_size=3&dictionary=test' 
       words = get_array response            
       words.should eq(['aa', 'ab', 'ac'])
     end
 
     it 'should get a second page size of three' do
-      response = Curl.get HOST + '/words.json?page_size=3&start=3' 
+      response = Curl.get HOST + '/words.json?page_size=3&start=3&dictionary=test' 
       words = get_array response            
       words.should eq(['ad', 'ae', 'af'])
     end
 
     it 'should not fail when out of range' do
-      response = Curl.get HOST + '/words.json?page_size=300&start=30000'
+      response = Curl.get HOST + '/words.json?page_size=300&start=30000&dictionary=test'
       words = get_array response
       words.should eq([])
     end
