@@ -19,3 +19,6 @@ heroku pg:wait =>
   tells me that I'm HEROKU_POSTGRESQL_JADE_URL
 
 heroku pg:promote HEROKU_POSTGRESQL_JADE_URL
+
+Testing
+curl cross-service.herokuapp.com/dictionaries
