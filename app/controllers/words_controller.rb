@@ -9,8 +9,8 @@ class WordsController < ApplicationController
     ps = params['page_size'].to_i
     page_size = ps > 0 ? ps : 100
     @words = []
-    Word.order('word').where(:processed=>0, 
-      :dictionary_id => @dictionary_id).offset(offset).limit(page_size).each do |w|
+    rel = Word.order('word').where(:processed=>0, :dictionary_id => @dictionary_id)
+    rel.offset(offset).limit(page_size).each do |w|
       @words << w.word
     end
     respond_to do |format|

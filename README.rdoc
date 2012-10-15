@@ -1,24 +1,59 @@
 
 
-Crossword Services API:
+Crossword Services API:  
 
-Example:
+Anagrams:   
 
-curl cross-service.herokuapp.com/anagrams/demo.json
+  Get anagrams from default dictionary
 
-=> ["mode","dome","demo"]
+    curl cross-service.herokuapp.com/anagrams/demo.json
 
-or 
+    => ["mode","dome","demo"]
 
-curl cross-services.herokuapp.com/anagrams/demo.json?dictionary=sowpops
+  or specify dictionary 
+
+    curl cross-services.herokuapp.com/anagrams/demo.json?dictionary=sowpops
+
+  Add word to anagrams using Ruby
+    require 'curb'
+    host = 'cross-service.herokuapp.com/anagrams.json'
+    Curl.post host, {:dictionary=>'test', :word => 'wordxyz'}
+
+
 
 Dictionaries
 
-curl cross-service.herokuapp.com/dictionaries.json
+  Get list of dictionaries
+    curl cross-service.herokuapp.com/dictionaries.json
+    # the dictionary 'sowpops' is an intersection of the scrabble dictionary and popular words
 
-the dictionary 'sowpops' is an intersection of the scrabble dictionary and popular words
+  Ruby to add a new dictionary
+    require 'curb'
+    host = 'cross-service.herokuapp.com/dictionaries.json'
+    Curl.post host, {:name=>'my_test', :attribution => 'my test dictionary'}
+
 
 Words
 
-curl cross-service.herokuapp.com/words.json?dictionary=sowpops&start_at=50000 
+Read words from a dictionary with paging
+
+curl 'cross-service.herokuapp.com/words.json?dictionary=sowpops&start=15000'
+
+Ruby to add word to dictionary
+  require 'curb'
+  host = 'cross-service.herokuapp.com/words.json'
+  Curl.post host, {:dictionary=>'test', :word => 'wordxyz'}
+
+
+Next steps @wip
+
+Compute all fully populated rectangular crosswords
+https://github.com/jfinucane/crossword
+
+Extend cross-service:   Add retrieval of rectangular crosswords by word 
+https://github.com/jfinucane/cross-service
+
+Future
+
+
 
