@@ -48,13 +48,13 @@ class AnagramsController < ApplicationController
     dictionary_id = nil
     @word = params['id']
     sorted_word= sort_chars params['id']
-    @dict_string = params['dictionary'] || 'sowpops'
+    @dict_string = params['dictionary'] || 'sowpods'
     if params['dictionary']
        dictionary = Dictionary.where(:name=>@dict_string.downcase)
        dictionary_id = dictionary.first.id if (dictionary && dictionary.count > 0) 
     end
     unless dictionary_id 
-      dictionary_id =Dictionary.where(:name=>'sowpops').first.id
+      dictionary_id =Dictionary.where(:name=>'sowpods').first.id
     end
     anagrams_key="anag:#{dictionary_id.to_s}:#{sorted_word}"
     @js = REDIS.smembers anagrams_key
