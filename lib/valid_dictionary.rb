@@ -9,4 +9,8 @@ module ValidDictionary
 	js = JSON.parse(response.body_str)
     js['words'].sort
 end
+  def whoops
+  	puts 'debugging message'
+  	'ERROR'
+  end
 end

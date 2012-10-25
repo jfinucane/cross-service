@@ -11,3 +11,4 @@
 /log/*.log
 /tmp
 .rspec
+/lib/tasks/demo.rake
