@@ -61,5 +61,7 @@ https://github.com/jfinucane/cross-service
 
 Future
 
+Natural language questions about words.
+
 
 
