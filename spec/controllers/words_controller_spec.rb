@@ -43,4 +43,13 @@ describe WordsController do
       words.should eq([])
     end
   end
+  describe "#api" do
+  
+    it 'should provide api description' do
+      response = Curl.get HOST
+      response.body_str.should match(/API docs/)
+    end
+
+
+  end
 end

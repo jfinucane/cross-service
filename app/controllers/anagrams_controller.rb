@@ -63,7 +63,6 @@ class AnagramsController < ApplicationController
       if sorted_records.length > 0
         a = Anagrams.where(:sorted_id => sorted_records.first.id)
         @js = a.map{|anagram| Word.where(:id=> anagram.word_id).word}
-        puts @js.inspect + '----------------'
       end
     end
     respond_to do |format|

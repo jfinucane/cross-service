@@ -1,22 +1,26 @@
+in bash shell 
+  export HOST=www.jimrails.com 
 
 
 Crossword Services API:  
+
+in bash shell => export HOST=www.jimrails.com 
 
 Anagrams:   
 
   Get anagrams from default dictionary
 
-    curl cross-service.herokuapp.com/anagrams/demo.json
+    curl $HOST/anagrams/demo.json
 
     => ["mode","dome","demo"]
 
   or specify dictionary 
 
-    curl cross-services.herokuapp.com/anagrams/demo.json?dictionary=sowpops
+    curl $HOST/anagrams/demo.json?dictionary=sowpods
 
   Add word to anagrams using Ruby
     require 'curb'
-    host = 'cross-service.herokuapp.com/anagrams.json'
+    host = "www.jimrails.com/anagrams.json"
     Curl.post host, {:dictionary=>'test', :word => 'wordxyz'}
 
 
@@ -24,12 +28,12 @@ Anagrams:
 Dictionaries
 
   Get list of dictionaries
-    curl cross-service.herokuapp.com/dictionaries.json
+    curl $HOST/dictionaries.json
     # the dictionary 'sowpops' is an intersection of the scrabble dictionary and popular words
 
   Ruby to add a new dictionary
     require 'curb'
-    host = 'cross-service.herokuapp.com/dictionaries.json'
+    host = 'www.jimrails.com/dictionaries.json'
     Curl.post host, {:name=>'my_test', :attribution => 'my test dictionary'}
 
 
@@ -37,15 +41,17 @@ Words
 
 Read words from a dictionary with paging
 
-curl 'cross-service.herokuapp.com/words.json?dictionary=sowpops&start=15000'
+curl $HOST'/words.json?dictionary=sowpods&start=15000'
 
 Ruby to add word to dictionary
   require 'curb'
-  host = 'cross-service.herokuapp.com/words.json'
+  host = "www.jimrails.com/words.json'
   Curl.post host, {:dictionary=>'test', :word => 'wordxyz'}
 
 
 Next steps @wip
+
+10/25 sowpods is the only populated dictionary.
 
 Compute all fully populated rectangular crosswords
 https://github.com/jfinucane/crossword
