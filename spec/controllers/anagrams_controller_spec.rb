@@ -78,13 +78,27 @@ describe AnagramsController do
       response = Curl.get HOST+ "/anagrams/#{word}.json?dictionary=test"
       JSON.parse(response.body_str).should eq(['ate', 'eat', 'tea'])
     end
-    it 'should default to sowpops, popular scrabble words' do
-      @args = {:dictionary=>'sowpops', :word=> 'testword'}
+    it 'should default to sowpods, popular scrabble words' do
+      #slightly evil and misleading; adding two bogus words in an official dictionary
+      @args = {:dictionary=>'sowpods', :word=> 'testwordxxx'}
       Curl.post HOST+'/anagrams.json', @args
-      @args = {:dictionary=>'sowpops', :word=> 'wordtest'}
+      @args = {:dictionary=>'sowpods', :word=> 'wordtestxxx'}
       Curl.post HOST+'/anagrams.json', @args
-      response = Curl.get HOST + '/anagrams/testword.json'
-      JSON.parse(response.body_str).sort.should eq(['testword', 'wordtest'])
+      response = Curl.get HOST + '/anagrams/xxxtestword.json'
+      JSON.parse(response.body_str).sort.should eq(['testwordxxx', 'wordtestxxx'])
+    end
+    it 'should find anagrams for a scrambled word' do
+      my_word = 'encyclopedia'
+      my_scrambled_word = my_word[2, my_word.size] + my_word[0,2]
+      @args = {:dictionary=>'test', :word=> my_word}
+      Curl.post HOST+'/anagrams.json', @args
+      response = Curl.get HOST + "/anagrams/#{my_scrambled_word}.json?dictionary=test"
+      JSON.parse(response.body_str).sort.should eq([my_word])
+    end
+    it 'should not find anagrams for a fake word' do
+      my_word = 'encyclopedia' + 'xxxx'
+      response = Curl.get HOST + "/anagrams/#{my_word}.json?dictionary=test"
+      JSON.parse(response.body_str).sort.should eq([])
     end
   end
 end

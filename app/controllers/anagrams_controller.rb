@@ -58,9 +58,17 @@ class AnagramsController < ApplicationController
     end
     anagrams_key="anag:#{dictionary_id.to_s}:#{sorted_word}"
     @js = REDIS.smembers anagrams_key
+    if @js.count == 0 
+      sorted_records = Word.where(:word=>sorted_word, :dictionary_id => dictionary_id, :processed => 1)
+      if sorted_records.length > 0
+        a = Anagrams.where(:sorted_id => sorted_records.first.id)
+        @js = a.map{|anagram| Word.where(:id=> anagram.word_id).word}
+        puts @js.inspect + '----------------'
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @js.to_json, layout:false }
+      format.json { render json: @js, layout:false }
     end
   end   
 
