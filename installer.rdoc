@@ -19,5 +19,6 @@ heroku pg:wait =>
 
 heroku pg:promote HEROKU_POSTGRESQL_JADE_URL
 
-Testing
-curl cross-service.herokuapp.com/dictionaries
+Apparent bugs on 10/25:
+ - find(:id=> value) worked in development; id not recognized as key on 10/25 heroku
+ - godaddy not routing jimrails.com correctly; forwarding trick to www.jimrails.com fails.
