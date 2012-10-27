@@ -62,7 +62,7 @@ class AnagramsController < ApplicationController
       sorted_records = Word.where(:word=>sorted_word, :dictionary_id => dictionary_id, :processed => 1)
       if sorted_records.length > 0
         a = Anagram.where(:sorted_id => sorted_records.first.id)
-        @js = a.map{|anagram| (Word.find(:id=> anagram.word_id)).word}
+        @js = a.map{|anagram| (Word.where(:id=> anagram.word_id)).first.word}
       end
     end
     respond_to do |format|

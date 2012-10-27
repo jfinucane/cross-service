@@ -90,9 +90,11 @@ describe AnagramsController do
     it 'should find anagrams for a scrambled word' do
       my_word = 'encyclopedia'
       my_scrambled_word = my_word[2, my_word.size] + my_word[0,2]
+      puts my_scrambled_word
       @args = {:dictionary=>'test', :word=> my_word}
       Curl.post HOST+'/anagrams.json', @args
       response = Curl.get HOST + "/anagrams/#{my_scrambled_word}.json?dictionary=test"
+      puts 'body_str',response.body_str
       JSON.parse(response.body_str).sort.should eq([my_word])
     end
     it 'should not find anagrams for a fake word' do
