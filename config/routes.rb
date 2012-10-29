@@ -1,7 +1,7 @@
 Testgen::Application.routes.draw do
   
   get 'words/api'
-
+  
   resources :anagrams
 
   resources :grid_types
@@ -11,7 +11,7 @@ Testgen::Application.routes.draw do
   resources :sketches
 
   resources :words
-
+  
   resources :dictionaries
 
   # The priority is based upon order of creation:
@@ -70,6 +70,6 @@ Testgen::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-
+  get "/:id", :controller=> 'anagrams', :action=> 'show', :conditions=> {:domain => /$(www.)?anagrams/}
   root :to => 'words#api'
 end

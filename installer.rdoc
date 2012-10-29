@@ -21,4 +21,15 @@ heroku pg:promote HEROKU_POSTGRESQL_JADE_URL
 
 Apparent bugs on 10/25:
  - find(:id=> value) worked in development; id not recognized as key on 10/25 heroku
- - godaddy not routing jimrails.com correctly; forwarding trick to www.jimrails.com fails.
+ 
+ Routing example for anagrams route:
+
+   Add a C record for the prefix anagrams at your DNS registry
+
+   Heroku 
+   herokou domains:add anagrams.jimrails.com
+ 
+   In config/routes.rb
+     get "/:id", :controller=> 'anagrams', :action=> 'show', :conditions=> {:domain => /$anagrams/}
+
+   anagrams.jimrails.com/deals
