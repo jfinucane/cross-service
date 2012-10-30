@@ -1,24 +1,2 @@
 <h2> Words for Crossword services.</h2>
-Dictionary:  <%= @dict_string %> <br/><br/>
-
-<table>
-<%- @words.each_with_index do |word,i| %>
-
-  <%- if  (i % 10) == 0 %>
-      <%- if i > 0%>
-        </tr>
-     <%- end %>
-     <tr>
-   <%- end %>
-   <td> <%= word %> </td>
- 
- <%- end  %>
-</tr><table> 
-<br/>
-<br/>
-<%- if @words.count == 0 %>
-  <%=link_to 'Find a valid Dictionary', dictionaries_path%>
-<%- else %>
-  Words on this page <%= @words.count %>
-  Total words <%= @dictionary_words.count %>
-<%end%>
+<%= render :partial => 'layouts/words'%>

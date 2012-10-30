@@ -1,25 +1,5 @@
-<h2> Words for Crossword services.</h2>
-Dictionary:  <%= @dict_string %> <br/>
-Words containing  "<%=@prefix[1..-2]%>"<br/>
+<h2> Words that contain a string for Crossword services</h2>
 
-<table>
-<%- @prefix_words.each_with_index do |word,i| %>
+Words containing  "<%=@prefix%>"<br/>
 
-  <%- if  (i % 10) == 0 %>
-      <%- if i > 0%>
-        </tr>
-     <%- end %>
-     <tr>
-   <%- end %>
-   <td> <%= word %> </td>
- 
- <%- end  %>
-</tr><table> 
-<br/>
-<br/>
-<%- if @prefix_words.count == 0 %>
-  <%=link_to 'Find a valid Dictionary', dictionaries_path%>
-<%- else %>
-  Words on this page <%= @prefix_words.count %>
-  Total words <%= @prefix_words.count %>
-<%end%>
+<%=render :partial=> 'layouts/words' %>

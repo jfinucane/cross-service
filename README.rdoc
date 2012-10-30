@@ -9,7 +9,7 @@ Words:
 
   Default dictionary is sowpods; to override:         &dictionary=test
   Default start word is 0; to override:               &offset=500 
-  Default 300 words returned at a time;  to override:   &page_size=1000
+  Default 200 words returned at a time;  to override:   &page_size=1000
 
   Services                                            
     curl anagrams.$HOST/sample.json        - returns -           list
@@ -17,7 +17,7 @@ Words:
     curl contains.$HOST/demo.json          - returns -           list
     curl suggestions.$HOST/demo.json       - returns -           lists in hash, by length @wip
     curl autocomplete.$HOST/demo.json      - returns -           list @wip
-
+     
   
 
 Get anagrams from default dictionary

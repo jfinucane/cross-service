@@ -3,6 +3,17 @@ require 'get_words.rb'
 include GetWords
 describe AnagramsController do
 
+  before :all do
+    @args = {:dictionary=>'test', :word=> 'tea'}
+    Curl.post HOST+'/anagrams.json', @args
+    @args = {:dictionary=>'test', :word=> 'eat'}
+    Curl.post HOST+'/anagrams.json', @args
+    @args = {:dictionary=>'test', :word=> 'ear'}
+    Curl.post HOST+'/anagrams.json', @args
+    @args = {:dictionary=>'test', :word=> 'ate'}
+    Curl.post HOST+'/anagrams.json', @args
+  end
+
   describe '#create' do
    
     before do 	
@@ -35,16 +46,6 @@ describe AnagramsController do
 
   describe '#index' do
   
-    before :all do
-  	  @args = {:dictionary=>'test', :word=> 'tea'}
-      Curl.post HOST+'/anagrams.json', @args
-      @args = {:dictionary=>'test', :word=> 'eat'}
-      Curl.post HOST+'/anagrams.json', @args
-      @args = {:dictionary=>'test', :word=> 'ear'}
-      Curl.post HOST+'/anagrams.json', @args
-      @args = {:dictionary=>'test', :word=> 'ate'}
-      Curl.post HOST+'/anagrams.json', @args
-    end
     it 'should require a dictionary'  do
       pending 'sowpods is the defaults dictionary'
       response = Curl.get HOST+ '/anagrams.json?word=ate'
@@ -101,6 +102,9 @@ describe AnagramsController do
       response = Curl.get HOST + "/anagrams/#{my_word}.json?dictionary=test"
       JSON.parse(response.body_str).sort.should eq([])
     end
+  end
+
+  describe '#suggestions' do
   end
 end
 
