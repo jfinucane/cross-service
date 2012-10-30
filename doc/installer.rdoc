@@ -30,6 +30,11 @@ Apparent bugs on 10/25:
    herokou domains:add anagrams.jimrails.com
  
    In config/routes.rb
-     get "/:id", :controller=> 'anagrams', :action=> 'show', :conditions=> {:domain => /$anagrams/}
+     get "/:id", :controller=> 'anagrams', :action=> 'show', :constraints=> {:domain => /anagrams.*/}
 
-   anagrams.jimrails.com/deals
+   Applies to these routes
+	   anagrams.jimrails.com/deals
+	   startswith.jimrails.com/deal
+	   contains.jimrails.com/deal
+	   suggestions.jimrails.com/deal    
+	   autocomplete.jimrails.com/deal

@@ -1,14 +1,26 @@
-in bash shell 
-  export HOST=www.jimrails.com 
-
 
 Crossword Services API:  
 
-in bash shell => export HOST=www.jimrails.com 
+Notes
+  
+  in bash shell => export HOST=www.jimrails.com 
 
-Anagrams:   
+Words: 
 
-  Get anagrams from default dictionary
+  Default dictionary is sowpods; to override:         &dictionary=test
+  Default start word is 0; to override:               &offset=500 
+  Up to 300 words returned at a time;  to override:   &page_size=1000
+
+  Services                                            returns
+    curl anagrams.$HOST/sample.json                   list
+    curl startswith.$HOST/sample.json                 list
+    curl contains.$HOST/demo.json                     list
+    curl suggestions.$HOST/demo.json                  lists in hash, by length @wip
+    curl autocomplete.$HOST/demo.json                 list @wip
+
+  
+
+Get anagrams from default dictionary
 
     curl $HOST/anagrams/demo.json
 
@@ -17,12 +29,6 @@ Anagrams:
   or specify dictionary 
 
     curl $HOST/anagrams/demo.json?dictionary=sowpods
-
-  Add word to anagrams using Ruby
-    require 'curb'
-    host = "www.jimrails.com/anagrams.json"
-    Curl.post host, {:dictionary=>'test', :word => 'wordxyz'}
-
 
 
 Dictionaries
@@ -36,32 +42,37 @@ Dictionaries
     host = 'www.jimrails.com/dictionaries.json'
     Curl.post host, {:name=>'my_test', :attribution => 'my test dictionary'}
 
-
-Words
-
-Read words from a dictionary with paging
-
-curl $HOST'/words.json?dictionary=sowpods&start=15000'
-
-Ruby to add word to dictionary
-  require 'curb'
-  host = "www.jimrails.com/words.json'
-  Curl.post host, {:dictionary=>'test', :word => 'wordxyz'}
+  Ruby to add word to dictionary
+    require 'curb'
+    host = "www.jimrails.com/words.json'
+    Curl.post host, {:dictionary=>'test', :word => 'wordxyz'}
 
 
 Next steps @wip
 
-10/25 sowpods is the only populated dictionary.
+  10/25 sowpods is the only populated dictionary.
 
-Compute all fully populated rectangular crosswords
-https://github.com/jfinucane/crossword
+  Compute all fully populated rectangular crosswords
+  https://github.com/jfinucane/crossword
 
-Extend cross-service:   Add retrieval of rectangular crosswords by word 
-https://github.com/jfinucane/cross-service
+  Extend cross-service:   Add retrieval of rectangular crosswords by word 
+  https://github.com/jfinucane/cross-service
 
-Future
+  suggestions - hash, key is length of suggestion (2..word.length+1)
 
-Natural language questions about words.
+  autocomplete - ordered by popularity.
+
+Icebox
+
+  levenhoods - levenshtein neighborhoods
+
+  autocorrect - autocomplete with corrections
+
+
+
+
+
+
 
 
 

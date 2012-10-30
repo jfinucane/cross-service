@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     def valid_dictionary
     @anagrams = params.dup
     @dictionary_id = nil
-    if @dict_string = params['dictionary']
+    if @dict_string = params['dictionary'] || 'sowpods'
       dictionary = Dictionary.where(:name=>@dict_string.downcase)
       if  dictionary && dictionary.count > 0
         @dictionary_id = dictionary.first.id

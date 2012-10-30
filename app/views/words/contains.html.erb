@@ -1,8 +1,9 @@
 <h2> Words for Crossword services.</h2>
-Dictionary:  <%= @dict_string %> <br/><br/>
+Dictionary:  <%= @dict_string %> <br/>
+Words containing with "<%=@prefix%>"<br/>
 
 <table>
-<%- @words.each_with_index do |word,i| %>
+<%- @prefix_words.each_with_index do |word,i| %>
 
   <%- if  (i % 10) == 0 %>
       <%- if i > 0%>
@@ -16,9 +17,9 @@ Dictionary:  <%= @dict_string %> <br/><br/>
 </tr><table> 
 <br/>
 <br/>
-<%- if @words.count == 0 %>
+<%- if @prefix_words.count == 0 %>
   <%=link_to 'Find a valid Dictionary', dictionaries_path%>
 <%- else %>
-  Words on this page <%= @words.count %>
-  Total words <%= @dictionary_words.count %>
+  Words on this page <%= @prefix_words.count %>
+  Total words <%= @prefix_words.count %>
 <%end%>

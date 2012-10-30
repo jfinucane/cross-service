@@ -70,6 +70,8 @@ Testgen::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-  get "/:id", :controller=> 'anagrams', :action=> 'show', :conditions=> {:domain => /$(www.)?anagrams/}
+  get "/:id", :controller=> 'anagrams', :action=> 'show', :constraints=> {:domain => /anagrams.*/}
+  get "/:id", :controller=> 'words', :action=>'startswith', :constraints => {:domain => /startswith.*/}
+  get "/:id", :controller => 'words', :action=>'contains', :constraints => {:domain => /contains.*/}
   root :to => 'words#api'
 end
