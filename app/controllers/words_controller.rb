@@ -6,7 +6,7 @@ class WordsController < ApplicationController
   def get_page words, params
     @offset = (params['start'] || params['offset']).to_i
     ps = params['page_size'].to_i
-    @page_size = ps > 0 ? ps : 300
+    @page_size = ps > 0 ? ps : 200
     @words = []
     words.offset(@offset).limit(@page_size).each do |w|
       @words << w.word
