@@ -38,6 +38,7 @@ class WordsController < ApplicationController
 
 
   def api
+    puts "DISPLAY API DOCS #{request.domain}, #{request.subdomain}"
     file = File.open(File.expand_path('../../../README.rdoc', __FILE__), 'r')
     @lines = file.read.split("\n")
     respond_to do |format|

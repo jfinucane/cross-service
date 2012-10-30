@@ -9,14 +9,14 @@ Words:
 
   Default dictionary is sowpods; to override:         &dictionary=test
   Default start word is 0; to override:               &offset=500 
-  Up to 300 words returned at a time;  to override:   &page_size=1000
+  Default 300 words returned at a time;  to override:   &page_size=1000
 
-  Services                                            returns
-    curl anagrams.$HOST/sample.json                   list
-    curl startswith.$HOST/sample.json                 list
-    curl contains.$HOST/demo.json                     list
-    curl suggestions.$HOST/demo.json                  lists in hash, by length @wip
-    curl autocomplete.$HOST/demo.json                 list @wip
+  Services                                            
+    curl anagrams.$HOST/sample.json        - returns -           list
+    curl startswith.$HOST/sample.json      - returns -           list
+    curl contains.$HOST/demo.json          - returns -           list
+    curl suggestions.$HOST/demo.json       - returns -           lists in hash, by length @wip
+    curl autocomplete.$HOST/demo.json      - returns -           list @wip
 
   
 
