@@ -70,8 +70,13 @@ Testgen::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+  # subdomain shows as domain on localhost
   get "/:id", :controller=> 'anagrams', :action=> 'show', :constraints=> {:domain => /anagrams.*/}
   get "/:id", :controller=> 'words', :action=>'startswith', :constraints => {:domain => /startswith.*/}
   get "/:id", :controller => 'words', :action=>'contains', :constraints => {:domain => /contains.*/}
+  # routing shows as subdomain on heroku
+    get "/:id", :controller=> 'anagrams', :action=> 'show', :constraints=> {:subdomain => /anagrams.*/}
+  get "/:id", :controller=> 'words', :action=>'startswith', :constraints => {:subdomain => /startswith.*/}
+  get "/:id", :controller => 'words', :action=>'contains', :constraints => {:subdomain => /contains.*/}
   root :to => 'words#api'
 end
