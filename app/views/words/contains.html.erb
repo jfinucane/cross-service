@@ -1,6 +1,6 @@
 <h2> Words for Crossword services.</h2>
 Dictionary:  <%= @dict_string %> <br/>
-Words containing with "<%=@prefix%>"<br/>
+Words containing  "<%=@prefix[1..-2]%>"<br/>
 
 <table>
 <%- @prefix_words.each_with_index do |word,i| %>
