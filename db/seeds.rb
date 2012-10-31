@@ -12,3 +12,4 @@ Dictionary.create(name: 'popular',
 Dictionary.create(name: 'sowpops',
 	              attribution: 'popular scrabble words: sowpows & popular') unless Dictionary.where(:name=>'sowpops').count > 0;
 Dictionary.create(name: 'test', attribution: 'for testing') unless Dictionary.where(:name=>'test').count > 0;
+Dictionary.create(name: 'advancedtest', attribution: 'for testing') unless Dictionary.where(:name=>'test').count > 0;
