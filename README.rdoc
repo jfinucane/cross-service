@@ -7,10 +7,6 @@ Notes
 
 Words: 
 
-  Default dictionary is sowpods; to override:         &dictionary=test
-  Default start word is 0; to override:               &offset=500 
-  Default 200 words returned at a time;  to override:   &page_size=1000
-
   Services
     curl $HOST/words.json                    - returns -           list
     curl anagrams.$HOST/any_word.json        - returns -           list
@@ -19,13 +15,20 @@ Words:
     curl suggestions.$HOST/any_word.json     - returns -           hash
     curl autocomplete.$HOST/any_word.json    - returns -           list 
 
-    Examples
-      jimrails.com/words.json&offset=500 lists words starting at offset 500
+  Examples
+      List words starting at offset 500 in default dictionary
+        jimrails.com/words.json?offset=500 
       
-      anagrams.jimrails.com/demo.json lists anagrams of "demo"
-        => ["mode","dome","demo"]
+      List anagrams of "demo"
+        anagrams.jimrails.com/demo.json => ["mode","dome","demo"]
       
-      anagrams.jimrails.com/demo.json&dictionary=test lists anagrams of demo in test dictionary
+      List anagrams of demo according to test dictionary
+        anagrams.jimrails.com/demo.json?dictionary=test 
+  
+  Optional parameters
+    Default dictionary is sowpods; to override:         &dictionary=test
+    Default start word is 0; to override:               &offset=500 
+    Default 200 words returned at a time;  to override: &page_size=1000
 
 Dictionaries
 
