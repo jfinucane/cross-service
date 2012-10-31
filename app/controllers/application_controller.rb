@@ -30,5 +30,4 @@ class ApplicationController < ActionController::Base
 	  word.each_char.map{|c|c}.sort.join('')    
   end
 
-
 end

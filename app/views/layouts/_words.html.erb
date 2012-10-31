@@ -15,7 +15,7 @@ Dictionary:  <%= @dict_string %> <br/><br/>
 <br/>
 <br/>
 <%- if @page.count == 0 %>
-  <%=link_to 'Find a valid Dictionary', dictionaries_path%>
+  <%=link_to 'Find a valid Dictionary and offset', dictionaries_path%>
 <%- else %>
   Words on this page <%= @page.count %> <br/>
   Total words <%= @words.count %> <br/>
