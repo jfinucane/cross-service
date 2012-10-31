@@ -3,7 +3,7 @@ Crossword Services API:
 
 Notes
   
-  in bash shell => export HOST=www.jimrails.com 
+  in bash shell => export HOST=jimrails.com 
 
 Words: 
 
@@ -11,25 +11,21 @@ Words:
   Default start word is 0; to override:               &offset=500 
   Default 200 words returned at a time;  to override:   &page_size=1000
 
-  Services                                            
-    curl anagrams.$HOST/sample.json        - returns -           list
-    curl startswith.$HOST/sample.json      - returns -           list
-    curl contains.$HOST/demo.json          - returns -           list
-    curl suggestions.$HOST/demo.json       - returns -           lists in hash, by length @wip
-    curl autocomplete.$HOST/demo.json      - returns -           list @wip
-     
-  
+  Services
+    curl $HOST/words.json                    - returns -           list
+    curl anagrams.$HOST/any_word.json        - returns -           list
+    curl startswith.$HOST/any_word.json      - returns -           list
+    curl contains.$HOST/any_word.json        - returns -           list
+    curl suggestions.$HOST/any_word.json     - returns -           hash
+    curl autocomplete.$HOST/any_word.json    - returns -           list 
 
-Get anagrams from default dictionary
-
-    curl $HOST/anagrams/demo.json
-
-    => ["mode","dome","demo"]
-
-  or specify dictionary 
-
-    curl $HOST/anagrams/demo.json?dictionary=sowpods
-
+    Examples
+      jimrails.com/words.json&offset=500 lists words starting at offset 500
+      
+      anagrams.jimrails.com/demo.json lists anagrams of "demo"
+        => ["mode","dome","demo"]
+      
+      anagrams.jimrails.com/demo.json&dictionary=test lists anagrams of demo in test dictionary
 
 Dictionaries
 
