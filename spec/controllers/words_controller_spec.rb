@@ -1,6 +1,4 @@
 require 'spec_helper.rb'
-require 'valid_dictionary.rb'
-include ValidDictionary
 describe WordsController do
   describe '#create' do
   	it 'should create a word' do 	

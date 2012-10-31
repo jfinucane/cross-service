@@ -1,12 +1,11 @@
 class WordsController < ApplicationController
-  require 'valid_dictionary'
-  include ValidDictionary
+  require 'response_parser'
+  include ResponseParser
   before_filter :valid_dictionary
 
   def get_page words, params
     @offset = (params['start'] || params['offset']).to_i
-    ps = params['page_size'].to_i
-    @page_size = ps > 0 ? ps : 200
+    @page_size = params['page_size'] ? params['page_size'].to_i : 300
     @words = []
     words.offset(@offset).limit(@page_size).each do |w|
       @words << w.word

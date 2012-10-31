@@ -6,6 +6,10 @@ require 'rspec/autorun'
 require 'factory_girl'
 require 'curb'
 require 'json'
+
+require 'response_parser.rb'
+include ResponseParser
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
