@@ -44,8 +44,7 @@ class DictionariesController < ApplicationController
   # POST /dictionaries
   # POST /dictionaries.json
   def create
-    @dictionary = Dictionary.new(params[:dictionary])
-
+    @dictionary = Dictionary.new(:name=>params['name'],:attribution=>params['attribution'])
     respond_to do |format|
       if @dictionary.save
         format.html { redirect_to @dictionary, notice: 'Dictionary was successfully created.' }
