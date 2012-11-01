@@ -1,6 +1,7 @@
-require 'curb'
+
 
 if ['development', 'test'].include? Rails.env
+  require 'curb'
 	class Curl::Easy
 	  def parsed
 	    JSON.parse(self.body_str)
