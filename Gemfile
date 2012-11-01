@@ -50,3 +50,6 @@ end
 gem 'redis'
 gem 'thin'
 gem 'foreman'
+
+#for benchmarking production
+gem 'curb'
