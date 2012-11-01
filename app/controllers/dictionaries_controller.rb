@@ -7,7 +7,6 @@ class DictionariesController < ApplicationController
     @dictionaries.each_with_index do |dict, index|
       @counts[index] = Word.where(:processed=>1, :dictionary_id=> dict.id).count
     end
-    puts request.format
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @dictionaries, :layout=>false }

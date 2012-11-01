@@ -1,5 +1,5 @@
-
-Crossword Services API:  
+ 
+Crossword Services API
 
 Notes
   
@@ -34,7 +34,6 @@ Dictionaries
 
   Get list of dictionaries
     curl $HOST/dictionaries.json
-    # the dictionary 'sowpops' is an intersection of the scrabble dictionary and popular words
 
   Ruby to add a new dictionary
     require 'curb'
@@ -49,7 +48,7 @@ Dictionaries
 
 Next steps @wip
 
-  10/25 sowpods is the only populated dictionary.
+  10/25 sowpods, the official scrabble dictionary is the only populated dictionary.
 
   Compute all fully populated rectangular crosswords
   https://github.com/jfinucane/crossword

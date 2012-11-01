@@ -9,6 +9,8 @@ require 'json'
 
 require 'response_parser.rb'
 include ResponseParser
+require 'suggestions.rb'
+include Suggestions
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

@@ -1,7 +1,7 @@
 class WordsController < ApplicationController
   require 'response_parser'
   include ResponseParser
-  before_filter :valid_dictionary
+  before_filter :validate_dictionary
 
   def get_page words, params
     @offset = (params['start'] || params['offset']).to_i
@@ -14,14 +14,15 @@ class WordsController < ApplicationController
       next_host = request.host 
       next_host += ':3000' if next_host =~ /localhost/
       @forward = '//' + next_host + "/" + @prefix + 
-        '?dictionary=' + @dict_string + '&offset=' + (@offset +@page_size).to_s
+        '?dictionary=' + @dictionary.name + '&offset=' + (@offset +@page_size).to_s
     end
     @words
   end
 
   def dictionary_words 
-    @dictionary_words = Word.order('word').where(:processed=>0, :dictionary_id => @dictionary_id)
+    @dictionary_words = Word.order('word').where(:processed=>0, :dictionary_id => @dictionary.id)
   end
+  
   def index
     @prefix='words'  
     @page = get_page dictionary_words, params
@@ -33,8 +34,8 @@ class WordsController < ApplicationController
 
   # POST /words, POST /words.json
   def create
-    if @dictionary_id
-      word = find_or_create_word(0, @anagrams['word'], @dictionary_id)
+    if @dictionary.id
+      word = find_or_create_word(0, @anagrams['word'], @dictionary.id)
       @anagrams[:status] = 'success'
     end
     respond_to do |format|
@@ -42,9 +43,7 @@ class WordsController < ApplicationController
     end
   end
 
-
   def api
-    puts "DISPLAY API DOCS #{request.domain}, #{request.subdomain}"
     file = File.open(File.expand_path('../../../README.rdoc', __FILE__), 'r')
     @lines = file.read.split("\n")
     respond_to do |format|

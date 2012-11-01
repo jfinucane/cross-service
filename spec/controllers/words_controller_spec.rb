@@ -18,26 +18,26 @@ describe WordsController do
     
     it 'should get the test words' do
       response = Curl.get HOST + '/words.json?dictionary=test' 
-      words = get_array response
+      words = response.parsed
       found_words = @words.select{|w| words.include? w} 
       found_words.sort.should == @words
     end
 
     it 'should get a page size of three' do
       response = Curl.get HOST + '/words.json?page_size=3&dictionary=test' 
-      words = get_array response            
+      words = response.parsed            
       words.should eq(['aa', 'ab', 'ac'])
     end
 
     it 'should get a second page size of three' do
       response = Curl.get HOST + '/words.json?page_size=3&start=3&dictionary=test' 
-      words = get_array response            
+      words = response.parsed            
       words.should eq(['ad', 'ae', 'af'])
     end
 
     it 'should not fail when out of range' do
       response = Curl.get HOST + '/words.json?page_size=300&start=30000&dictionary=test'
-      words = get_array response
+      words = response.parsed
       words.should eq([])
     end
   end
@@ -45,7 +45,7 @@ describe WordsController do
   
     it 'should provide api description' do
       response = Curl.get HOST
-      response.body_str.should match(/API docs/)
+      response.body_str.should match(/Crossword Services API/)
     end
 
 

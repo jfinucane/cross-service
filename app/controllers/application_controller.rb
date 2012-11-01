@@ -7,27 +7,18 @@ class ApplicationController < ActionController::Base
     processed, word, dictionary_id)
  end
 
-  def valid_dictionary
-    @anagrams = params.dup
-    @dictionary_id = nil
-    if @dict_string = params['dictionary'] || 'sowpods'
-      dictionary = Dictionary.where(:name=>@dict_string.downcase)
-      if  dictionary && dictionary.count > 0
-        @dictionary_id = dictionary.first.id
-        if word = params['word']
-          @anagrams['word'] =  word.downcase
-          @anagrams['sorted_word'] = sort_chars word
-        end
-      else
-        @anagrams[:status] = 'bad dictionary parameter'
-      end
-    else
-      @anagrams[:status] = 'missing dictionary parameter'
-    end   
-  end
+
 
   def sort_chars word
 	  word.each_char.map{|c|c}.sort.join('')    
   end
 
+  def validate_dictionary
+    @anagrams = params.dup
+    @dictionary, @using_default = Dictionary.find_or_default(params)
+    if word = (params['word'] || params['id'])
+      @anagrams['word'] =  word.downcase
+      @anagrams['sorted_word'] = sort_chars word
+    end
+  end
 end
