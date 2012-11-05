@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
 
   def sort_chars word
-	  word.each_char.map{|c|c}.sort.join('')    
+	  word.chars.sort.join('')    
   end
 
   def validate_dictionary

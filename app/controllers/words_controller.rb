@@ -5,10 +5,10 @@ class WordsController < ApplicationController
 
   def get_page words, params
     @offset = (params['start'] || params['offset']).to_i
-    @page_size = params['page_size'] ? params['page_size'].to_i : 300
-    @words = []
+    @page_size = params['page_size'] ? params['page_size'].to_i : 200
+    word_list = []
     words.offset(@offset).limit(@page_size).each do |w|
-      @words << w.word
+      word_list << w.word
     end
     if @offset + @page_size < words.count 
       next_host = request.host 
@@ -16,7 +16,7 @@ class WordsController < ApplicationController
       @forward = '//' + next_host + "/" + @prefix + 
         '?dictionary=' + @dictionary.name + '&offset=' + (@offset +@page_size).to_s
     end
-    @words
+   word_list
   end
 
   def dictionary_words 

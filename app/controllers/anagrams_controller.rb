@@ -1,7 +1,9 @@
 require 'redis'
 class AnagramsController < ApplicationController
+require 'suggestions.rb'
+include Suggestions
+before_filter :validate_dictionary
 
-  before_filter :validate_dictionary
   # GET /anagrams
   # GET /anagrams.json
   def showdb
@@ -45,19 +47,23 @@ class AnagramsController < ApplicationController
   def show
     anagrams_key="anag:#{@dictionary.id.to_s}:#{@anagrams[:sorted_word]}"
     @js = REDIS.smembers anagrams_key
-=begin    
-    if @js.count == 0 
-      sorted_records = Word.where(:word=>@anagrams[:sorted_word], :dictionary_id => @dictionary.id, :processed => 1)
-      if sorted_records.length > 0
-        a = Anagram.where(:sorted_id => sorted_records.first.id)
-        @js = a.map{|anagram| (Word.where(:id=> anagram.word_id)).first.word}
-      end
-    end
-=end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @js, layout:false }
     end
   end   
+
+  def suggestions
+    s=SingleDifference.new @dictionary.id
+    start_time = Time.now
+    @suggestions = s.suggestions @word
+    end_time = Time.now
+    #puts "SUGGESTIONS FOR #{@word} from #{@dictionary} #{@suggestions.inspect}"
+    @elapsed_time = end_time - start_time
+    respond_to do |format|
+      format.html
+      format.json { render json: @suggestions, layout:false}
+    end
+  end
 
 end

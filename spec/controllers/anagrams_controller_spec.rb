@@ -4,7 +4,8 @@ describe AnagramsController do
 
   before :all do
     @host = 'anagrams.' + HOST + '/'
-
+    @dict = 'test'
+    word_list = 'tea', 'eat', 'ear', 'ate', 'rate','at'
     @args = {:dictionary=>'test', :word=> 'tea'}
     Curl.post HOST+'/anagrams.json', @args
     @args = {:dictionary=>'test', :word=> 'eat'}
@@ -95,7 +96,15 @@ describe AnagramsController do
   end
 
   describe '#suggestions' do
+    describe 'should make suggestions in addition to anagrams, ' do
+      it 'should respond with a hash' do
+        my_word = 'tea'
+        response = Curl.get 'suggestions.' + HOST+ "/#{my_word}.json?dictionary=test"
+        expect(get_keys response).to match_array(['addone', 'shorten', 'anagrams'])
+      end
+    end
   end
+
 end
 
 
