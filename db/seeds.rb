@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 Dictionary.create(name: 'sowpods',
-	              attribution: 'scrabble via norvig') unless Dictionary.where(:name=>'sowpods').count > 0;
+	              attribution: 'The official scrabble dictionary via Peter Norvig web site') unless Dictionary.where(:name=>'sowpods').count > 0;
 Dictionary.create(name: 'popular',
 	              attribution: 'google popular.txt via norvig') unless Dictionary.where(:name=>'popular').count > 0;
 Dictionary.create(name: 'sowpops',
