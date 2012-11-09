@@ -15,6 +15,8 @@ Testgen::Application.routes.draw do
   get 'anagrams/showdb'
 
   get 'words/api'
+
+  get 'words/api_docs'
   
   resources :anagrams
 

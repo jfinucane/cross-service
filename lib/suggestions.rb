@@ -19,7 +19,7 @@ module Suggestions
 	  	words_by_added_char
 	  end
 	  def shorten word
-	    @shortest = word.length > 8 ? (word.length - 3) : 3 
+	    @shortest = word.length > 9 ? (word.length - 4) : 3 
 	  	@words = Set.new
 	  	@done = Hash.new 
 	    deleteone word.chars.sort.join('')
