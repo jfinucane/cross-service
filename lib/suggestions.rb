@@ -22,7 +22,7 @@ module Suggestions
 	    @shortest = word.length > 9 ? (word.length - 4) : 3 
 	  	@words = Set.new
 	  	@done = Hash.new 
-	    deleteone word.chars.sort.join('')
+	    deleteone word[0,12].chars.sort.join('')
       @words
     end
     def deleteone sorted_word
