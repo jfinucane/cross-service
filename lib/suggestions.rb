@@ -19,17 +19,19 @@ module Suggestions
 	  	words_by_added_char
 	  end
 	  def shorten word
-	    @shortest = word.length > 9 ? (word.length - 4) : 3 
+	  	max_word = word[0,12]
+	  	len = max_word.length
+	    @shortest = len > 9 ? (len - 4) : 3 
 	  	@words = Set.new
 	  	@done = Hash.new 
-	    deleteone word[0,12].chars.sort.join('')
+	    deleteone max_word.chars.sort.join('')
       @words
     end
     def deleteone sorted_word
-    	return if sorted_word.length < @shortest
 	    (0...sorted_word.length).each {|i|
 	      temp = sorted_word.dup
 	      temp[i]=''
+	      return if temp.length < @shortest
 	      @done[temp] ? next : @done[temp] = true
 	      @words += REDIS.smembers anag_key(temp) || []       
 	      deleteone temp
