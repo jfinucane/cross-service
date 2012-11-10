@@ -19,12 +19,10 @@ module Suggestions
 	  	words_by_added_char
 	  end
 	  def shorten word
-	  	max_word = word[0,12]
-	  	len = max_word.length
-	    @shortest = len > 9 ? (len - 4) : 3 
+	    @shortest = word.length > 9 ? (word.length - 4) : 2 
 	  	@words = Set.new
 	  	@done = Hash.new 
-	    deleteone max_word.chars.sort.join('')
+	    deleteone word.chars.sort.join('')
       @words
     end
     def deleteone sorted_word

@@ -52,13 +52,22 @@ class WordsController < ApplicationController
     end
   end
 
+  def api_docs
+    file = File.open(File.expand_path('../../../README.rdoc', __FILE__), 'r')
+    @lines = file.read.split("\n")
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @lines }
+    end
+  end
+
   def startswith
     @prefix = params[:id] 
     @words = dictionary_words.where('word like ?', @prefix + '%')
     @page = get_page @words, params
     respond_to do |format|
       format.html # startswith.html.erb
-      format.json { render json: @page.to_json }
+      format.json { render json: callback(@page) }
     end
   end
 
@@ -68,7 +77,7 @@ class WordsController < ApplicationController
     @page = get_page @words, params
     respond_to do |format|
       format.html # startswith.html.erb
-      format.json { render json: @page.to_json }
+      format.json { render json:  callback(@page) }
     end
   end
 

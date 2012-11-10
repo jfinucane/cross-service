@@ -1,0 +1,34 @@
+<table>
+  <tr>
+   <td> Anagrams </td>
+   <%- @suggestions['anagrams'].each  do |a| %>
+      <td> <%=a%> </td>
+   <%- end %>
+  </tr>
+  <tr>
+   <td> Shortened words </td>
+   <%- @suggestions['shorten'].each_with_index  do |a,i| %>
+      <td> <%=a%> </td>
+      <%- if i%10 == 9 %>
+          </tr><tr><td></td>
+          <%- end %>
+   <%- end %>
+  </tr>
+  <tr>
+   <td> Add one Letter: </td>
+  </tr><tr>
+   <%- @suggestions['addone'].each_pair  do |letter, words| %>
+      <td> --<%= letter %>-- </td>
+      <%- words.each_with_index do |w,i|  %>
+        <td> <%=w%></td>
+        <%- if i%10 == 9 %>
+          </tr><tr><td></td>
+          <%- end %>
+      <%- end %> 
+      </tr>
+      <tr> 
+   <%- end %>
+  </tr>
+
+
+ </table>

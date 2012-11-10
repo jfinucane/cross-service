@@ -20,7 +20,7 @@ before_filter :validate_dictionary
     end
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @anagrams.to_json, layout:false }
+      format.json { render json: callback(@anagrams), layout:false }
     end
   end
 
@@ -37,7 +37,6 @@ before_filter :validate_dictionary
     else
       @anagrams[:status] = 'provide a valid dictionary' 
     end
-    
     respond_to do |format|
       format.json { render json: @anagrams.to_json, layout: false}
     end
@@ -49,20 +48,26 @@ before_filter :validate_dictionary
     @js = REDIS.smembers anagrams_key
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @js, layout:false }
+      format.json { render json: callback(@js), layout:false }
     end
   end   
 
   def suggestions
     s=SingleDifference.new @dictionary.id
     start_time = Time.now
+    @word = @word[0,12]
     @suggestions = s.suggestions @word
+    if params[:callback]
+      @suggestions = render_to_string(:partial=>'anagrams/suggestions_table', 
+        :formats=>'html',
+        :locals=>{:suggestions=> @suggestions})
+      @suggestions = '<span>' + @suggestions.gsub(/\n/,'') + '</span>'
+    end
     end_time = Time.now
-    #puts "SUGGESTIONS FOR #{@word} from #{@dictionary} #{@suggestions.inspect}"
     @elapsed_time = end_time - start_time
     respond_to do |format|
       format.html
-      format.json { render json: @suggestions, layout:false}
+      format.json { render json: callback(@suggestions), layout:false}
     end
   end
 

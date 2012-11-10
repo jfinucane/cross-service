@@ -7,6 +7,15 @@ class ApplicationController < ActionController::Base
     processed, word, dictionary_id)
  end
 
+ def callback js 
+   cb = params['callback']
+   if cb
+     cb + '(' + js.to_json + ')' 
+   else 
+    js.to_json
+  end
+  
+end
 
 
   def sort_chars word
