@@ -1,6 +1,6 @@
 module Spell
 	class Edit1
-	  attr_accessor :word, :splits, :edit2_words
+	  attr_accessor :word, :splits, :edit2_words, :words_with_dups
     def initialize word
     	@word = word
     	@splits = (0..@word.length).each.map{|s|[@word[0, s],@word[s..-1]]}
@@ -34,7 +34,13 @@ module Spell
       end 
     end
     def edit1
-      (deletes + transposes + replaces + inserts).to_set
+      @words_with_dups = deletes + transposes + replaces + inserts
+      @words_with_dups.to_set
+    end
+
+    def levenhood
+      @words_with_dups = deletes + replaces + inserts
+      @words_with_dups.to_set
     end
 
     def edit2

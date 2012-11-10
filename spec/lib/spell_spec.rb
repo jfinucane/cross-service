@@ -40,9 +40,13 @@ describe Edit1 do
   end
   describe "#words" do
     before :all do
-      @words = @s.words
+      @neighborhood = @s.edit1
+      @words_with_dups = @s.words_with_dups
     end
-    it 'the count should be 241' do @words.count.should eq(241); end
+    it 'the count should be 241' do @words_with_dups.count.should eq(241); end
+    it 'without dups should be a bit less than 241' do
+      @neighborhood.count.should < 241
+    end
   end
 end
 
