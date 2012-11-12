@@ -3,7 +3,7 @@ $(function() {
 	    $( "<div>" ).text( message ).prependTo( "#log" );
 	    $( "#results" ).scrollTop( 0 );
 	}
-  $('#result').addClass('hide');
+  $('#results').addClass('hide');
 	var HOST = $('#PLATFORM_HOST').text().replace(/^\s*/,'').replace(/\n/,'');
   function word_service (){return ($('#word_service option:selected')[0].value)}
   function build_url (term){
