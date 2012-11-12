@@ -36,7 +36,8 @@ Testgen::Application.configure do
   config.active_support.deprecation = :stderr
 
   HOST='localhost:3000'
+  MAX_WORD_FOR_SHORTEN = 7
   
   #ENV["REDISTOGO_URL"] = 'redis://jimfinucane:237a1a3eb8d00156cbf75e16907377c5@herring.redistogo.com:9028' 
-   ENV["REDISTOGO_URL"] = "redis://jimfinucane:ce6ac4d0535770058cb4d25d8d499a01@bluegill.redistogo.com:9127"
+  ENV["REDISTOGO_URL"] = "redis://jimfinucane:ce6ac4d0535770058cb4d25d8d499a01@bluegill.redistogo.com:9127"
 end

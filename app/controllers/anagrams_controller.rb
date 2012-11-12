@@ -36,7 +36,7 @@ before_filter :validate_dictionary
       REDIS.sadd anagrams_key, @anagrams['word']
     else
       @anagrams[:status] = 'provide a valid dictionary' 
-    end
+    end  
     respond_to do |format|
       format.json { render json: @anagrams.to_json, layout: false}
     end
@@ -55,7 +55,6 @@ before_filter :validate_dictionary
   def suggestions
     s=SingleDifference.new @dictionary.id
     start_time = Time.now
-    @word = @word[0,12]
     @suggestions = s.suggestions @word
     if params[:callback]
       @suggestions = render_to_string(:partial=>'anagrams/suggestions_table', 

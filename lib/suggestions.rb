@@ -1,6 +1,6 @@
 module Suggestions
 	class SingleDifference
-    attr_reader :dictionary_id, :words
+    attr_reader :dictionary_id, :words, :redis_calls
 	  def initialize dictionary_id
 	    @dictionary_id = dictionary_id.to_s
 	   
@@ -22,17 +22,17 @@ module Suggestions
 	    @shortest = word.length > 9 ? (word.length - 4) : 2 
 	  	@words = Set.new
 	  	@done = Hash.new 
-	    deleteone word.chars.sort.join('')
+	    deleteone word.chars.sort.join('') if word.length > @shortest
       @words
     end
     def deleteone sorted_word
 	    (0...sorted_word.length).each {|i|
 	      temp = sorted_word.dup
 	      temp[i]=''
-	      return if temp.length < @shortest
-	      @done[temp] ? next : @done[temp] = true
-	      @words += REDIS.smembers anag_key(temp) || []       
-	      deleteone temp
+	      next if @done[temp]
+        @done[temp] = true
+	      @words += REDIS.smembers anag_key(temp) || [] 
+	      deleteone temp if temp.length > @shortest
 	    } 
 	  end
 	  def anagrams word
@@ -41,7 +41,7 @@ module Suggestions
 	  def suggestions word
 	  	@result = Hash.new
 	  	@result['addone'] = addone word
-	  	@result['shorten'] = shorten word
+	  	@result['shorten'] = shorten word[0, MAX_WORD_FOR_SHORTEN]
 	  	@result['anagrams'] = anagrams word
 	    @result
 	  end
