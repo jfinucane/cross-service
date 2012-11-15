@@ -1,5 +1,9 @@
 Testgen::Application.routes.draw do
   
+  resources :autocompletions
+
+  resources :pop_scores
+
     get "/:id", :controller => 'anagrams',   :action=> 'show',      :constraints=> {:domain => /anagrams.*/}
   get "/:id", :controller => 'words',      :action=>'startswith', :constraints => {:domain => /startswith.*/}
   get "/:id", :controller => 'words',      :action=>'contains',   :constraints => {:domain => /contains.*/}

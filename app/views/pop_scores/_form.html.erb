@@ -1,0 +1,29 @@
+<%= form_for(@pop_score) do |f| %>
+  <% if @pop_score.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pop_score.errors.count, "error") %> prohibited this pop_score from being saved:</h2>
+
+      <ul>
+      <% @pop_score.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :word %><br />
+    <%= f.text_area :word %>
+  </div>
+  <div class="field">
+    <%= f.label :score %><br />
+    <%= f.number_field :score %>
+  </div>
+  <div class="field">
+    <%= f.label :dictionary_id %><br />
+    <%= f.number_field :dictionary_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

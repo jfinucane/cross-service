@@ -1,0 +1,27 @@
+<h1>Listing pop_scores</h1>
+
+<table>
+  <tr>
+    <th>Word</th>
+    <th>Score</th>
+    <th>Dictionary</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pop_scores.each do |pop_score| %>
+  <tr>
+    <td><%= pop_score.word %></td>
+    <td><%= pop_score.score %></td>
+    <td><%= pop_score.dictionary_id %></td>
+    <td><%= link_to 'Show', pop_score %></td>
+    <td><%= link_to 'Edit', edit_pop_score_path(pop_score) %></td>
+    <td><%= link_to 'Destroy', pop_score, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pop score', new_pop_score_path %>

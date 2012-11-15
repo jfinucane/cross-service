@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Prefix:</b>
+  <%= @autocompletion.prefix %>
+</p>
+
+<p>
+  <b>Words:</b>
+  <%= @autocompletion.words %>
+</p>
+
+<p>
+  <b>Dictionary:</b>
+  <%= @autocompletion.dictionary_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_autocompletion_path(@autocompletion) %> |
+<%= link_to 'Back', autocompletions_path %>

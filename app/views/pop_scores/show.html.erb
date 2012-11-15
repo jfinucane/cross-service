@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Word:</b>
+  <%= @pop_score.word %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @pop_score.score %>
+</p>
+
+<p>
+  <b>Dictionary:</b>
+  <%= @pop_score.dictionary_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_pop_score_path(@pop_score) %> |
+<%= link_to 'Back', pop_scores_path %>

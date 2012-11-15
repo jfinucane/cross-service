@@ -1,0 +1,27 @@
+<h1>Listing autocompletions</h1>
+
+<table>
+  <tr>
+    <th>Prefix</th>
+    <th>Words</th>
+    <th>Dictionary</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @autocompletions.each do |autocompletion| %>
+  <tr>
+    <td><%= autocompletion.prefix %></td>
+    <td><%= autocompletion.words %></td>
+    <td><%= autocompletion.dictionary_id %></td>
+    <td><%= link_to 'Show', autocompletion %></td>
+    <td><%= link_to 'Edit', edit_autocompletion_path(autocompletion) %></td>
+    <td><%= link_to 'Destroy', autocompletion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Autocompletion', new_autocompletion_path %>

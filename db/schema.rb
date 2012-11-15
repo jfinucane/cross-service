@@ -11,13 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121006192550) do
+ActiveRecord::Schema.define(:version => 20121115131332) do
 
   create_table "anagrams", :force => true do |t|
     t.string  "dictionary_id"
     t.integer "sorted_id"
     t.integer "word_id"
   end
+
+  create_table "autocompletions", :force => true do |t|
+    t.text    "prefix"
+    t.text    "words"
+    t.integer "dictionary_id"
+  end
+
+  add_index "autocompletions", ["prefix"], :name => "index_autocompletions_on_prefix"
 
   create_table "dictionaries", :force => true do |t|
     t.text     "name"
@@ -40,6 +48,12 @@ ActiveRecord::Schema.define(:version => 20121006192550) do
     t.integer "orient"
     t.integer "nth"
     t.string  "word_id"
+  end
+
+  create_table "pop_scores", :force => true do |t|
+    t.text    "word"
+    t.integer "score"
+    t.integer "dictionary_id"
   end
 
   create_table "sketches", :force => true do |t|

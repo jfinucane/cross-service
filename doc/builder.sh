@@ -15,3 +15,7 @@ rails generate scaffold Anagrams dictionary_id:integer sorted_id:integer word_id
 rake db:create:all
 rake db:migrate
 rake db:seed
+
+#add autocomplete
+rails generate scaffold PopScores word:text score:integer dictionary_id:integer
+rails generate scaffold Autocompletions prefix:text words:text dictionary_id:integer
