@@ -16,7 +16,7 @@ $(function() {
 	            dataType: "jsonp",
 	            data: {
 	                pagesize: 20,
-	                dictionary: 'sowpods'
+	                dictionary: $('#DICTIONARY').text()
 	            },
 	            success: function( data ) {
                  var msg; 
@@ -52,7 +52,7 @@ $(function() {
          minLength: 2,
          data: {
                   pagesize: 20,
-                  dictionary: 'sowpods'
+                  dictionary: $('#DICTIONARY').text()
               },
         success: function( data ) { 
           $('#results').removeClass('hide').html('');
