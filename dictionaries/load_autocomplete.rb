@@ -17,20 +17,18 @@ File.open('dictionaries/popular.txt','r') do |a|
   end
 end
 
-#pops are sorted in order of descending popularity
+popular_and_in_sowpods = @pops.each_key.select do |w| 
+  w.length > 1 && @sowpods.include? w
+end 
+
 prefixes = Prefixes.new 'sowpops'
 prefixes.reset
-popular_and_in_sowpods = @pops.each_key.select{|w| 
-  w.length > 1 && @sowpods.include? w
-}
 prefixes.build popular_and_in_sowpods
-
 prefixes.persist
 
-prefixes.change_dictionary 'sowpods'
-
-@sowpods.each do |w|
-  next unless w.length > 1
-  prefixes.compute_each w
-end
+prefixes = Prefixes.new 'sowpods'
+prefixes.reset
+prefixes.build popular_and_in_sowpods
+prefixes.build @sowpods
+prefixes.persist
 
