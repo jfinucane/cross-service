@@ -18,7 +18,7 @@ File.open('dictionaries/popular.txt','r') do |a|
 end
 
 popular_and_in_sowpods = @pops.each_key.select do |w| 
-  w.length > 1 && @sowpods.include? w
+  (w.length > 1) && (@sowpods.include? w)
 end 
 
 prefixes = Prefixes.new 'sowpops'
@@ -31,4 +31,7 @@ prefixes.reset
 prefixes.build popular_and_in_sowpods
 prefixes.build @sowpods
 prefixes.persist
+
+
+
 
