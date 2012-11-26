@@ -1,8 +1,10 @@
 class AutocompletionsController < ApplicationController
+
+  before_filter :validate_dictionary
   # GET /autocompletions
   # GET /autocompletions.json
   def index
-    @autocompletions = Autocompletion.all
+    @autocompletions = [Autocompletion.first]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,11 +15,12 @@ class AutocompletionsController < ApplicationController
   # GET /autocompletions/1
   # GET /autocompletions/1.json
   def show
-    @autocompletion = Autocompletion.find(params[:id])
-
+    @prefix = params[:id]
+    @autocompletion = Autocompletion.find_by_prefix_and_dictionary_id(@prefix, @dictionary.id)
+    @js = @autocompletion  && JSON.parse(@autocompletion.try(:words)) ||[]
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @autocompletion }
+      format.json { render json: callback(@js) }
     end
   end
 

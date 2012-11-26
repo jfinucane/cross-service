@@ -64,6 +64,7 @@ Testgen::Application.configure do
   #host for services
   HOST='jimrails.com'
   MAX_WORD_FOR_SHORTEN = 10
+  AUTOCOMPLETE = 7
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5

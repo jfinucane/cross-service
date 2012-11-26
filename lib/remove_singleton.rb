@@ -1,7 +1,4 @@
-#before cleanup are all words in redistogo
-#answer was 267K updates, zero errors.  WOW.
-#if no anagrams do not save in redistogo
-
+#not used
 words.each_with_index{|w,i| 
   break if i>100
   sorted= sort_chars w.word

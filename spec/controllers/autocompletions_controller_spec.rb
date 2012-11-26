@@ -20,33 +20,45 @@ require 'spec_helper'
 
 describe AutocompletionsController do
 
+  before :all do
+    @scores = Autoloader.new
+  end
+
   # This should return the minimal set of attributes required to create a valid
   # Autocompletion. As you add validations to Autocompletion, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
   end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # AutocompletionsController. Be sure to keep this updated too.
   def valid_session
-    {}
+    {dictionary: 'advancedtest'}
   end
 
-  describe "GET index" do
-    it "assigns all autocompletions as @autocompletions" do
-      autocompletion = Autocompletion.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:autocompletions).should eq([autocompletion])
-    end
-  end
+ 
 
   describe "GET show" do
     it "assigns the requested autocompletion as @autocompletion" do
       autocompletion = Autocompletion.create! valid_attributes
-      get :show, {:id => autocompletion.to_param}, valid_session
-      assigns(:autocompletion).should eq(autocompletion)
+      get :show, {:id => 'b', dictionary: 'advancedtest'}, valid_session
+      assigns(:dictionary).name.should eq('advancedtest')
+    end
+    it 'checks for "ba"' do 
+      get :show, {:id => 'ba', dictionary: 'advancedtest'}, valid_session
+      words=JSON.parse(assigns(:autocompletion).words)
+      words.should eq(@scores.complete 'ba')
+    end
+    it 'checks for "ban"' do 
+      get :show, {:id => 'ban', dictionary: 'advancedtest'}, valid_session
+      words=JSON.parse(assigns(:autocompletion).words)
+      words.should eq(@scores.complete 'ban')
+    end
+    it 'checks for "bant"' do 
+      get :show, {:id => 'bant', dictionary: 'advancedtest'}, valid_session
+      words=JSON.parse(assigns(:autocompletion).words)
+      words.should eq(@scores.complete 'bant')
     end
   end
 

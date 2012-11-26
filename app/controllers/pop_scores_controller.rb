@@ -1,8 +1,10 @@
 class PopScoresController < ApplicationController
+
+  before_filter :validate_dictionary
   # GET /pop_scores
   # GET /pop_scores.json
   def index
-    @pop_scores = PopScore.all
+    @pop_scores = [PopScore.first]
 
     respond_to do |format|
       format.html # index.html.erb
