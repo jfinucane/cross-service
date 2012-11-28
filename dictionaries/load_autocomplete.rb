@@ -12,8 +12,8 @@ File.open('dictionaries/popular.txt','r') do |a|
   while(r=a.gets) do
     m = r.match(/(\w+)\s(\d+)/)
     popword  = m[1]
-    smaller = (m[2].to_i**0.5).to_i
-    @pops[m[1]] = smaller
+    smaller_score = (m[2].to_i**0.5).to_i
+    @pops[m[1]] = smaller_score
   end
 end
 
@@ -31,7 +31,5 @@ prefixes.reset
 prefixes.build popular_and_in_sowpods
 prefixes.build @sowpods
 prefixes.persist
-
-
 
 

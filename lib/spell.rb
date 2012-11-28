@@ -1,5 +1,5 @@
 module Spell
-	class Edit1
+	class Neighbors
 	  attr_accessor :word, :splits, :edit2_words, :words_with_dups
     def initialize word
     	@word = word
@@ -45,7 +45,7 @@ module Spell
 
     def edit2
       @edit2_words=Set.new
-      edit1.each{|word| @edit2_words += Edit1.new(word).edit1}
+      edit1.each{|word| @edit2_words += Neighbors.new(word).edit1}
       puts @edit2.count
     end
 

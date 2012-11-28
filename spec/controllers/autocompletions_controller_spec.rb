@@ -22,6 +22,7 @@ describe AutocompletionsController do
 
   before :all do
     @scores = Autoloader.new
+    AUTOCOMPLETE = 5
   end
 
   # This should return the minimal set of attributes required to create a valid

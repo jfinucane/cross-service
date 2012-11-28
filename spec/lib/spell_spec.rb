@@ -1,7 +1,7 @@
 require 'spec_helper.rb'
-describe Edit1 do
+describe Neighbors do
   before :all do
-    @s = Edit1.new 'word'
+    @s = Neighbors.new 'word'
   end
   describe "Tests based on mispelling 'word' by one change"	do
     describe "#new" do
