@@ -31,7 +31,7 @@ module BuildPrefixes
   end
 
   class Scores
-    attr_accessor :auto
+    attr_accessor :auto, :id
     def initialize dict
       @auto = Hash.new{|h,k| h[k] = Array.new}
       raise unless @id = Dictionary.find_by_name(dict).id
@@ -42,17 +42,17 @@ module BuildPrefixes
     def reason_to_add_score score, prefix
       if @auto[prefix] == []
         true
-      elsif @auto[prefix].include?(score)
+      elsif @auto[prefix].map{|s| s[1]}.include?(score[1])
         false
       else
         has_room = @auto[prefix].size < AUTOCOMPLETE
-        bigger_than_lowest_score = score[0] > @auto[prefix].first[0] 
-        has_room || bigger_than_lowest_score
+        bigger_than_lowest = score[0] > @auto[prefix].first[0] 
+        has_room || bigger_than_lowest
       end
     end
-    def build scores, min_length=3, max_length= 7
+    def build scores, min_length=3, max_length=7
       scores.each do |score|
-        word = score[1]
+        word = score[2] || score[1]
         last= [max_length,word.length].min
         (min_length..last).each do |i|
           prefix = word[0,i]
