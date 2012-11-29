@@ -1,5 +1,5 @@
 
-require File.expand_path('../dictionaries/read_dictionary.rb', __FILE__)
+require File.expand_path('../read_dictionary.rb', __FILE__)
 include ReadDictionary
 require 'build_prefixes.rb'
 include BuildPrefixes
@@ -31,14 +31,17 @@ good_scores.build popular_and_in_sowpods.map{|word| [@pops[word], word]};nil
 bad_scores = Scores.new 'sowpops_with_spellcheck'
 puts 'start benchmark'
 puts Benchmark.measure{
-  popular_and_in_sowpods[0,30000].each{|word|
+  popular_and_in_sowpods[0,25000].each{|word|
     neighbors = Neighbors.new word
     errors = neighbors.edit1
     bad_scores.build errors.map{|error| [@pops[word] || 1, word, error]}
   } 
 }
 
-a=File.open('bad_scores', 'w')
-bad_scores.auto.each{|s|i+=1;buffer << s; if i%1000==0; puts i; a.puts buffer.to_json; buffer=[]; end }
+a=File.open('bad_scores.txt', 'w')
+buffer=[]
+bad_scores.auto.each{|s|i+=1;buffer << s; if i%1000==0; puts i; a.puts buffer.to_json; buffer=[]; end };nil
+a.puts buffer
+a.close
 puts 'hi'
 nil
