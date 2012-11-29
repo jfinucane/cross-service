@@ -30,8 +30,11 @@ good_scores.build popular_and_in_sowpods.map{|word| [@pops[word], word]};nil
 =end
 bad_scores = Scores.new 'sowpops_with_spellcheck'
 puts 'start benchmark'
+i=0
 puts Benchmark.measure{
   popular_and_in_sowpods[0,25000].each{|word|
+    i +=1
+    puts i if i%1000 == 0
     neighbors = Neighbors.new word
     errors = neighbors.edit1
     bad_scores.build errors.map{|error| [@pops[word] || 1, word, error]}
@@ -40,6 +43,7 @@ puts Benchmark.measure{
 
 a=File.open('bad_scores.txt', 'w')
 buffer=[]
+i=0
 bad_scores.auto.each{|s|i+=1;buffer << s; if i%1000==0; puts i; a.puts buffer.to_json; buffer=[]; end };nil
 a.puts buffer
 a.close
