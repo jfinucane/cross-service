@@ -13,6 +13,8 @@ Dictionary.create(name: 'sowpops',
 	              attribution: 'popular scrabble words: sowpows & popular') unless Dictionary.where(:name=>'sowpops').count > 0;
 Dictionary.create(name: 'test', attribution: 'for testing') unless Dictionary.where(:name=>'test').count > 0;
 Dictionary.create(name: 'advancedtest', attribution: 'for testing') unless Dictionary.where(:name=>'advancedtest').count > 0
+Dictionary.create(name: 'advancedtest_with_spellcheck', attribution: 'add spelling errors to advanced test based on popular.txt scores') 
+Dictionary.create(name: 'advancedtest_levenhood', attribution: 'build level levenshtein neighbors for advancedtest') 
 Dictionary.create(name: 'sowpods_with_spellcheck', attribution: 'add spelling errors to sowpods based on popular.txt scores') 
 Dictionary.create(name: 'sowpops_with_spellcheck', attribution: 'add spelling errors to sowpops based on popular.txt scores') 
 Dictionary.create(name: 'sowpods_levenhood', attribution: 'build level levenshtein neighbors for sowpods') 

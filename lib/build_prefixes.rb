@@ -32,7 +32,8 @@ module BuildPrefixes
 
   class Scores
     attr_accessor :auto, :id
-    def initialize dict
+    def initialize dict, spelling_errors=true
+      @spelling_errors = spelling_errors
       @auto = Hash.new{|h,k| h[k] = Array.new}
       raise unless @id = Dictionary.find_by_name(dict).id
     end
@@ -40,7 +41,9 @@ module BuildPrefixes
       Autocompletion.where(dictionary_id: @id).each{|a| a.delete}
     end
     def reason_to_add_score score, prefix
-      if @auto[prefix] == []
+      if @spelling_errors && score[1][0,prefix.length] == prefix 
+        false
+      elsif @auto[prefix] == []
         true
       elsif @auto[prefix].map{|s| s[1]}.include?(score[1])
         false
@@ -71,7 +74,7 @@ module BuildPrefixes
 
     def persist
       @auto.each_pair do |k,scores|
-        v = scores.map{|score| score[1]}.reverse
+        v = scores.map{|score| score}.reverse
         Autocompletion.create(prefix:k, words:v.to_json, dictionary_id: @id)
       end
     end

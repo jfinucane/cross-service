@@ -24,6 +24,27 @@ class AutocompletionsController < ApplicationController
     end
   end
 
+  # GET /autocompletions/1
+  # GET /autocompletions/1.json
+  def autospell
+    @prefix = params[:id]
+    autocompletion = Autocompletion.find_by_prefix_and_dictionary_id(@prefix, @dictionary.id)
+    completions = []
+    completions += JSON.parse(autocompletion[:words]) if autocompletion
+    spell_dict_name = @dictionary.name + '_with_spellcheck'
+    spell_dict = Dictionary.find_by_name(@dictionary.name + '_with_spellcheck')
+    auto = spell_dict && Autocompletion.find_by_prefix_and_dictionary_id(@prefix, spell_dict.id)
+    if auto
+      spell_completions = JSON.parse(auto[:words]) 
+      completions <<  ' - did you mean -' 
+      completions += spell_completions.map{|score|score[1]}
+    end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: callback(completions) }
+    end
+  end
+
   # GET /autocompletions/new
   # GET /autocompletions/new.json
   def new
@@ -43,10 +64,23 @@ class AutocompletionsController < ApplicationController
   # POST /autocompletions
   # POST /autocompletions.json
   def create
-    @autocompletion = Autocompletion.new(params[:autocompletion])
+    puts params.inspect, params.class
+    autocomplete = params[:autocompletion]
+    @dictionary = Dictionary.find_by_name(params[:dictionary])
 
+    if @dictionary
+      autocomplete = JSON.parse autocomplete if autocomplete.class == String # because of curb
+      if autocomplete.is_a? Hash 
+        @autocompletion = Autocompletion.create_in_dictionary autocomplete, @dictionary.id
+      else
+        autocomplete.each do |auto_array|
+          auto_hash = {prefix: auto_array[0], words: auto_array[1].to_json}
+          @autocompletion = Autocompletion.create_in_dictionary auto_hash, @dictionary.id
+        end
+      end
+    end
     respond_to do |format|
-      if @autocompletion.save
+      if @dictionary && @autocompletion
         format.html { redirect_to @autocompletion, notice: 'Autocompletion was successfully created.' }
         format.json { render json: @autocompletion, status: :created, location: @autocompletion }
       else

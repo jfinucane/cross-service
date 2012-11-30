@@ -49,7 +49,7 @@ describe Scores do
   context '#build' do
     context 'scores determine order' do 
       before :each do
-        @d = Scores.new 'advancedtest'
+        @d = Scores.new 'advancedtest', false
         @word_list = [[10, 'deal'],[5,'deacon']]
         @d.build @word_list
       end
@@ -81,7 +81,7 @@ describe Scores do
     end
     context 'control the length of prefixes'  do    
       before :each do
-        @d = Scores.new 'advancedtest'
+        @d = Scores.new 'advancedtest', false
       end
       it 'should only create the specified prefixes' do
         @d.build [[17, 'beastly']], min_length=2,max_length=4

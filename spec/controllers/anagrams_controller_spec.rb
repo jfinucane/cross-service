@@ -50,7 +50,7 @@ describe AnagramsController do
     it 'should find anagrams' do
       word='tea'
       response = Curl.get @host + "#{word}.json?dictionary=test"
-      response.parsed.should eq(['ate', 'eat', 'tea'])
+      response.parsed.sort.should eq(['ate', 'eat', 'tea'])
     end
     it 'should not find anagrams for an unknown letter combination' do
       word='txn'
@@ -60,7 +60,7 @@ describe AnagramsController do
     it 'should find anagrams even if letters are out of order' do
       word='tae'
       response = Curl.get @host+ "#{word}.json?dictionary=test"
-      response.parsed.should eq(['ate', 'eat', 'tea'])
+      response.parsed.sort.should eq(['ate', 'eat', 'tea'])
     end 
     it 'should default to sowpods, popular scrabble words' do
       #slightly evil and misleading; adding two bogus words in an official dictionary

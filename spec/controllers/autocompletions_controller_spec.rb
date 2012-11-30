@@ -29,16 +29,19 @@ describe AutocompletionsController do
   # Autocompletion. As you add validations to Autocompletion, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
+    {:prefix=>'st',:words=>[77, 'score']}
+  end
+
+  def valid_attributes_list
+    [['st',[77, 'score']], ['sta',[88,'stage']]]
   end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # AutocompletionsController. Be sure to keep this updated too.
   def valid_session
-    {dictionary: 'advancedtest'}
   end
 
- 
 
   describe "GET show" do
     it "assigns the requested autocompletion as @autocompletion" do
@@ -79,21 +82,33 @@ describe AutocompletionsController do
   end
 
   describe "POST create" do
+    before :each do
+      raise unless @id = Dictionary.find_by_name('advancedtest_with_spellcheck').id
+      @auto1 = {autocompletion: {prefix: 'bax', words: [100,'baby']}.to_json, 
+                dictionary: 'advancedtest_with_spellcheck'}
+  
+    end
     describe "with valid params" do
+
       it "creates a new Autocompletion" do
         expect {
-          post :create, {:autocompletion => valid_attributes}, valid_session
+          post :create, @auto1, valid_session
         }.to change(Autocompletion, :count).by(1)
+      end
+      it "creates two new Autocompletions" do
+        expect {
+          post :create, {:dictionary=>'advancedtest', :autocompletion=>valid_attributes_list}, valid_session
+        }.to change(Autocompletion, :count).by(2)
       end
 
       it "assigns a newly created autocompletion as @autocompletion" do
-        post :create, {:autocompletion => valid_attributes}, valid_session
+        post :create, {:dictionary=>'advancedtest', :autocompletion => valid_attributes}, valid_session
         assigns(:autocompletion).should be_a(Autocompletion)
         assigns(:autocompletion).should be_persisted
       end
 
       it "redirects to the created autocompletion" do
-        post :create, {:autocompletion => valid_attributes}, valid_session
+        post :create, {:dictionary=>'advancedtest', :autocompletion => valid_attributes}, valid_session
         response.should redirect_to(Autocompletion.last)
       end
     end
@@ -102,7 +117,7 @@ describe AutocompletionsController do
       it "assigns a newly created but unsaved autocompletion as @autocompletion" do
         # Trigger the behavior that occurs when invalid params are submitted
         Autocompletion.any_instance.stub(:save).and_return(false)
-        post :create, {:autocompletion => {}}, valid_session
+        post :create, {:dictionary=>'advancedtest', :autocompletion => {}}, valid_session
         assigns(:autocompletion).should be_a_new(Autocompletion)
       end
 
