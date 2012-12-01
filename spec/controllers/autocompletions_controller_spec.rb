@@ -44,6 +44,9 @@ describe AutocompletionsController do
 
 
   describe "GET show" do
+    before do
+      AUTOCOMPLETE = 5
+    end
     it "assigns the requested autocompletion as @autocompletion" do
       autocompletion = Autocompletion.create! valid_attributes
       get :show, {:id => 'b', dictionary: 'advancedtest'}, valid_session
