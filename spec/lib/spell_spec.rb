@@ -25,7 +25,7 @@ describe Neighbors do
     	before :all do
         @replacements = @s.replaces
       end
-      it 'the count should be 104'  do @replacements.count.should eq(104); end
+      it 'the count should be 100'  do @replacements.count.should eq(100); end
       it '"ward" is included'  do @replacements.include?('ward').should be_true; end
       it '"worz" is included'  do @replacements.include?('worz').should be_true; end
       it '"warz" is not included'  do @replacements.include?('warz').should be_false; end
@@ -44,7 +44,7 @@ describe Neighbors do
         @neighborhood = @s.edit1
         @words_with_dups = @s.words_with_dups
       end
-      it 'the count should be 241' do @words_with_dups.count.should eq(241); end
+      it 'the count should be 237' do @words_with_dups.count.should eq(237); end
       it 'without dups should be a bit less than 241' do
         @neighborhood.count.should < 241
       end
