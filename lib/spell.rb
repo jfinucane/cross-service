@@ -21,10 +21,12 @@ module Spell
     end
     def replaces
       return [] if @word.length < 2
-      (0...@word.length).inject([]) do |a,position| 
+      list = (0...@word.length).inject([]) do |a,position| 
         left, right = @splits[position] 
         ('a'..'z').inject(a){|b,char| b << left + char + right[1..-1]}
       end 
+      list.delete(@word)
+      list
     end
     def inserts
       return [] if @word.length < 1
