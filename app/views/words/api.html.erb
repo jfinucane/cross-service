@@ -1,33 +1,26 @@
-
-
-<div style="width: 600px, height: 200px">
 <h3> Enter a word </h3>
+
+<div style="width: 450px, height: 200px">
+!
 <div style='float:left; position: relative; top: 5px;'>
-<select id='word_service'>
-	<option value='anagrams'  selected='selected'> Anagrams </option>
-	<option value='startswith'> Starts with</option>
-	<option value='contains'> Contains </option>
-	<option value='suggestions'> Scrabble Suggestions</option>
-	<option value='autocomplete'> Autocomplete </option>
-	<option value='autospell'> Autocompelete with spell check</option>
-	<option value='levenhood'> Levenshtein words </options>
+<select id='word_service', style='font-size: 140%'>
+  <option value='anagrams'  selected='selected'> Anagrams ( use ? for wildcard) </option>
+  <option value='startswith'> Starts with</option>
+  <option value='contains'> Contains </option>
+  <option value='suggestions'> Scrabble Suggestions</option>
+  <option value='autocomplete'> Autocomplete </option>
+  <option value='autospell'> Autocompelete with spell check</option>
+  <option value='levenhood'> Levenshtein words </options>
 </select>
 </div>
   
-<div class="ui-widget" style='float:left'>
-    <input id="word" />
-</div>
-</div>
+ <div class="ui-widget" style='float:left;'>
+    <input style='width: 200px;' id="word" />
+</div> <br/>
 
-<script>
 
-</script>
-</div></div><br/> <br/>
+ <div id="results" style=" width: 400px; overflow: auto; margin-top: 2em; font-family: Arial;" class="ui-widget-content"></div> 
 
- <div class="ui-widget" style="margin-top: 2em; font-family: Arial;">
- 
-    
-    <div id="results" style="height: 800px; width: 900px; overflow: auto;" class="ui-widget-content"></div>
-</div>
+<br/> <br/>  <a href='/words/api_docs'> About </a>
 
-<br/> <br/>  <a href='/words/api_docs'> Crossword Services API Documentation </a>
+

@@ -5,7 +5,6 @@ require 'build_prefixes.rb'
 include BuildPrefixes
 require 'spell.rb'
 include Spell
-puts Neighbors.new 'fred'
 
 @sowpods, @popular, @sowpops = getter; nil
 

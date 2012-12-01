@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     @dictionary, @using_default = Dictionary.find_or_default(params)
     if @word = (params['word'] || params['id'])
       @anagrams['word'] =  @word.downcase
-      @anagrams['sorted_word'] = sort_chars @word
+      @anagrams['sorted_word'] = sort_chars @anagrams['word']
     end
   end
 end

@@ -7,7 +7,8 @@ $(function() {
 	var HOST = $('#PLATFORM_HOST').text().replace(/^\s*/,'').replace(/\n/,'');
   function word_service (){return ($('#word_service option:selected')[0].value)}
   function build_url (term){
-    url ='http://' + word_service() + '.' + HOST + '/' + term + '.json'; 
+    var gterm = term.replace(/\?/g,'*')
+    url ='http://' + word_service() + '.' + HOST + '/' + gterm + '.json'; 
     return(url)
   }
 	function ajax_call ( request, response ) {

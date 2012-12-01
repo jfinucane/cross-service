@@ -5,6 +5,6 @@ class CreateAutocompletions < ActiveRecord::Migration
       t.text :words
       t.integer :dictionary_id
     end
-    add_index('autocompletions', 'prefix', {:uniqe=>true})
+    add_index('autocompletions', 'prefix', {:unique=>true})
   end
 end

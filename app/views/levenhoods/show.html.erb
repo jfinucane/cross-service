@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Prefix:</b>
+  <%= @levenhood.prefix %>
+</p>
+
+<p>
+  <b>Words:</b>
+  <%= @levenhood.words %>
+</p>
+
+<p>
+  <b>Dictionary:</b>
+  <%= @levenhood.dictionary_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_levenhood_path(@levenhood) %> |
+<%= link_to 'Back', levenhoods_path %>

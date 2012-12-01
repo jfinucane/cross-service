@@ -21,8 +21,8 @@ require 'spec_helper'
 describe AutocompletionsController do
 
   before :all do
-    @scores = Autoloader.new
     AUTOCOMPLETE = 5
+    @scores = Autoloader.new
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -44,7 +44,7 @@ describe AutocompletionsController do
 
 
   describe "GET show" do
-    before do
+    before :each do
       AUTOCOMPLETE = 5
     end
     it "assigns the requested autocompletion as @autocompletion" do

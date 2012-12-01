@@ -42,10 +42,19 @@ before_filter :validate_dictionary
     end
   end
 
+
+  def word_list wildcard
+    result = JSON.parse(wildcard.words)
+    result.to_a[100] = " -#{result.count-100} more" if result.count > 100 
+    result.to_a[0,101] 
+  end
+
   # GET /anagrams.json/word
   def show
-    anagrams_key="anag:#{@dictionary.id.to_s}:#{@anagrams[:sorted_word]}"
-    @js = REDIS.smembers anagrams_key
+    no_result_found =  ["No anagrams for #{@anagrams[:word]}"]  
+    word = @anagrams[:sorted_word]
+    wc = Wildcards.find_by_word(word)
+    @js = wc ? word_list(wc) : no_result_found
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: callback(@js), layout:false }
@@ -55,7 +64,7 @@ before_filter :validate_dictionary
   def suggestions
     s=SingleDifference.new @dictionary.id
     start_time = Time.now
-    @suggestions = s.suggestions @word
+    @suggestions = s.suggestions @word.downcase.gsub(/\*/,'')
     if params[:callback]
       @suggestions = render_to_string(:partial=>'anagrams/suggestions_table', 
         :formats=>'html',

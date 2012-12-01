@@ -19,3 +19,8 @@ rake db:seed
 #add autocomplete
 rails generate scaffold PopScores word:text score:integer dictionary_id:integer
 rails generate scaffold Autocompletions prefix:text words:text dictionary_id:integer
+
+rails generate scaffold Levenhoods neighbor:text words:text dictionary_id:integer
+#modify the models for Autocompletions and Levenhoods
+#add_index('autocompletions', 'prefix')
+rails generate model Wildcards word:text words:text  dictionary_id:integer

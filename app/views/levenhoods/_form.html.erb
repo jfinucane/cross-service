@@ -1,0 +1,29 @@
+<%= form_for(@levenhood) do |f| %>
+  <% if @levenhood.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@levenhood.errors.count, "error") %> prohibited this levenhood from being saved:</h2>
+
+      <ul>
+      <% @levenhood.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :prefix %><br />
+    <%= f.text_area :prefix %>
+  </div>
+  <div class="field">
+    <%= f.label :words %><br />
+    <%= f.text_area :words %>
+  </div>
+  <div class="field">
+    <%= f.label :dictionary_id %><br />
+    <%= f.number_field :dictionary_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

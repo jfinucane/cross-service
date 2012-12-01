@@ -1,9 +1,17 @@
  
 Crossword Services API
 
+1.  Show a few common word game tools
+2.  Document the capabilities as services
+3.  Default dictionary: popular scrabble words
+
+Contact
+ jimway@gmail.com
+
 Notes
   
-  in bash shell => export HOST=jimrails.com 
+  in bash shell => 
+    export HOST=jimrails.com 
 
 Words: 
 
@@ -26,7 +34,7 @@ Words:
         anagrams.jimrails.com/demo.json?dictionary=test 
   
   Optional parameters
-    Default dictionary is sowpods; to override:         &dictionary=test
+    ?dictionary=test
     Default start word is 0; to override:               &offset=500 
     Default 200 words returned at a time;  to override: &page_size=1000
 
@@ -46,25 +54,7 @@ Dictionaries
     Curl.post host, {:dictionary=>'test', :word => 'wordxyz'}
 
 
-Next steps @wip
-
-  10/25 sowpods, the official scrabble dictionary is the only populated dictionary.
-
-  Compute all fully populated rectangular crosswords
-  https://github.com/jfinucane/crossword
-
-  Extend cross-service:   Add retrieval of rectangular crosswords by word 
-  https://github.com/jfinucane/cross-service
-
-  suggestions - hash, key is length of suggestion (2..word.length+1)
-
-  autocomplete - ordered by popularity.
-
-Icebox
-
-  levenhoods - levenshtein neighborhoods
-
-  autocorrect - autocomplete with corrections
+ 
 
 
 

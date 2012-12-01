@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121129132526) do
+ActiveRecord::Schema.define(:version => 20121203213250) do
 
   create_table "anagrams", :force => true do |t|
     t.string  "dictionary_id"
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(:version => 20121129132526) do
     t.string  "word_id"
   end
 
+  create_table "levenhoods", :force => true do |t|
+    t.text    "neighbor"
+    t.text    "words"
+    t.integer "dictionary_id"
+  end
+
+  add_index "levenhoods", ["neighbor"], :name => "index_levenhoods_on_neighbor"
+
   create_table "pop_scores", :force => true do |t|
     t.text    "word"
     t.integer "score"
@@ -60,6 +68,14 @@ ActiveRecord::Schema.define(:version => 20121129132526) do
     t.integer "gridtype"
     t.string  "sketch"
   end
+
+  create_table "wildcards", :force => true do |t|
+    t.text    "word"
+    t.text    "words"
+    t.integer "dictionary_id"
+  end
+
+  add_index "wildcards", ["word"], :name => "index_wildcards_on_word"
 
   create_table "words", :force => true do |t|
     t.text    "word"

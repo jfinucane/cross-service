@@ -15,7 +15,7 @@ class AutocompletionsController < ApplicationController
   # GET /autocompletions/1
   # GET /autocompletions/1.json
   def show
-    @prefix = params[:id]
+    @prefix = params[:id].downcase.gsub(/\*/,'')
     @autocompletion = Autocompletion.find_by_prefix_and_dictionary_id(@prefix, @dictionary.id)
     @js = @autocompletion  && JSON.parse(@autocompletion.try(:words)) ||[]
     respond_to do |format|
@@ -27,7 +27,7 @@ class AutocompletionsController < ApplicationController
   # GET /autocompletions/1
   # GET /autocompletions/1.json
   def autospell
-    @prefix = params[:id]
+    @prefix = params[:id].downcase.gsub(/\*/,'')
     autocompletion = Autocompletion.find_by_prefix_and_dictionary_id(@prefix, @dictionary.id)
     completions = []
     completions += JSON.parse(autocompletion[:words]) if autocompletion

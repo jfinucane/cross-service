@@ -62,7 +62,7 @@ class WordsController < ApplicationController
   end
 
   def startswith
-    @prefix = params[:id] 
+    @prefix = params[:id].downcase.gsub(/\*/,'')
     @words = dictionary_words.where('word like ?', @prefix + '%')
     @page = get_page @words, params
     respond_to do |format|
@@ -72,7 +72,7 @@ class WordsController < ApplicationController
   end
 
   def contains
-    @prefix = params[:id]
+    @prefix = params[:id].downcase.gsub(/\*/,'')
     @words = dictionary_words.where('word like ?', '%' + @prefix + '%')
     @page = get_page @words, params
     respond_to do |format|

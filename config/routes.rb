@@ -1,5 +1,7 @@
 Testgen::Application.routes.draw do
   
+  resources :levenhoods
+
   resources :autocompletions
 
   resources :pop_scores
@@ -10,7 +12,7 @@ Testgen::Application.routes.draw do
   get "/:id", :controller => 'anagrams',   :action=>'suggestions',:constraints => {:domain => /suggestions.*/}
   get "/:id", :controller => 'autocompletions',   :action=>'show',:constraints => {:domain => /autocomplete.*/}
   get "/:id", :controller => 'autocompletions',   :action=>'autospell',:constraints => {:domain => /autospell.*/}
-  get "/:id", :controller => 'autocompletions',   :action=>'levenhood',:constraints => {:domain => /levenhood.*/}
+  get "/:id", :controller => 'levenhoods',   :action=>'show',:constraints => {:domain => /levenhood.*/}
   # routing shows as subdomain on heroku
   get "/:id", :controller => 'anagrams',   :action=> 'show',      :constraints => {:subdomain => /anagrams.*/}
   get "/:id", :controller => 'words',      :action=>'startswith', :constraints => {:subdomain => /startswith.*/}
@@ -18,7 +20,7 @@ Testgen::Application.routes.draw do
   get "/:id", :controller => 'anagrams',   :action=>'suggestions',:constraints => {:subdomain => /suggestions.*/}
   get "/:id", :controller => 'autocompletions',   :action=>'show',:constraints => {:subdomain => /autocomplete.*/}
   get "/:id", :controller => 'autocompletions',   :action=>'autospell',:constraints => {:subdomain => /autospell.*/}
-  get "/:id", :controller => 'autocompletions',   :action=>'levenhood',:constraints => {:subdomain => /levenhood.*/}
+  get "/:id", :controller => 'levenhoods',   :action=>'show',:constraints => {:subdomain => /levenhood.*/}
 
   get 'anagrams/showdb'
 
