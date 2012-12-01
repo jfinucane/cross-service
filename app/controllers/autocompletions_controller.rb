@@ -36,7 +36,7 @@ class AutocompletionsController < ApplicationController
     else
       spell_dict_name = @dictionary.name + '_with_spellcheck'
     end  
-    spell_dict = Dictionary.find_by_name(@dictionary.name + '_with_spellcheck')
+    spell_dict = Dictionary.find_by_name(spell_dict_name)
     auto = spell_dict && Autocompletion.find_by_prefix_and_dictionary_id(@prefix, spell_dict.id)
     if auto
       spell_completions = JSON.parse(auto[:words]) 
