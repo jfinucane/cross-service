@@ -12,3 +12,5 @@
 /tmp
 .rspec
 /lib/tasks/demo.rake
+
+.env
