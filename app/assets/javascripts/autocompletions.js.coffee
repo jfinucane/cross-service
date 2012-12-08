@@ -7,9 +7,7 @@ agent = 'ipad' if a.match(/ipad/i)
 agent = 'macintosh' if a.match(/macintosh/i)
 agent = 'android' if a.match(/android/i)
 agent = 'iphone' if a.match(/iphone/i)
-alert(agent)  
+  
 jQuery -> 
-  alert $('#device').text();
-  console.log 'hello'
   $('#device').text agent
   
