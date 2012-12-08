@@ -68,7 +68,6 @@ class AutocompletionsController < ApplicationController
   # POST /autocompletions
   # POST /autocompletions.json
   def create
-    puts params.inspect, params.class
     autocomplete = params[:autocompletion]
     @dictionary = Dictionary.find_by_name(params[:dictionary])
 

@@ -45,7 +45,7 @@ describe WordsController do
   
     it 'should provide api description' do
       response = Curl.get HOST
-      response.body_str.should match(/Crossword Services API/)
+      response.body_str.should match(/Word Services/)
     end
 
 

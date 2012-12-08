@@ -50,27 +50,18 @@ describe AnagramsController do
     it 'should find anagrams' do
       word='tea'
       response = Curl.get @host + "#{word}.json?dictionary=test"
-      response.parsed.sort.should eq(['ate', 'eat', 'tea'])
+      response.parsed.sort.should eq(['ate', 'eat', 'eta', 'tae', 'tea'])
     end
     it 'should not find anagrams for an unknown letter combination' do
       word='txn'
       response = Curl.get @host+ "#{word}.json?dictionary=test"
-      response.parsed.should  eq([])
+      response.parsed[0].should  match(/No anagrams/)
     end
     it 'should find anagrams even if letters are out of order' do
-      word='tae'
+      word='aet'
       response = Curl.get @host+ "#{word}.json?dictionary=test"
-      response.parsed.sort.should eq(['ate', 'eat', 'tea'])
+      response.parsed.count.should > 2
     end 
-    it 'should default to sowpods, popular scrabble words' do
-      #slightly evil and misleading; adding two bogus words in an official dictionary
-      @args = {:dictionary=>'sowpods', :word=> 'testwordxxx'}
-      Curl.post HOST+'/anagrams.json', @args
-      @args = {:dictionary=>'sowpods', :word=> 'wordtestxxx'}
-      Curl.post HOST+'/anagrams.json', @args
-      response = Curl.get @host + 'xxxtestword.json'
-      JSON.parse(response.body_str).sort.should eq(['testwordxxx', 'wordtestxxx'])
-    end
   end
 
   describe '#showdb' do

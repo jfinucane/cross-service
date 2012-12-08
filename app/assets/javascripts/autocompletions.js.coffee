@@ -7,7 +7,7 @@ agent = 'android' if a.match(/android/i)
 agent = 'iphone' if a.match(/iphone/i)
   
 jQuery ->
-  $("#results").addClass 'Hide'
+  $("#results").addClass 'hide'
   HOST = $('#PLATFORM_HOST').text().replace(/^\s*/,'').replace(/\n/,'');
   word_service = () ->
     $('#word_service option:selected')[0].value 
@@ -28,6 +28,7 @@ jQuery ->
         else
           msg = [label: 'See Below']
           $('#results').removeClass('hide').html('')
+          $(data).appendTo $('#results')
         response msg  
   $('#device').text 'on your ' + agent
   $('#word').autocomplete
@@ -47,8 +48,9 @@ jQuery ->
           dictionary: $('DICTIONARY').text()
         success: (data) ->
           $('#results').removeClass('hide').html('')
-          if word_service() == 'suggestions' 
+          if word_service() == 'suggestions'
+            console.log data 
             $(data).appendTo $('#results')
           else
-          $.map data, 
-            (item) -> $('<span>'+item+'</span><br/>').appendTo $('#results')   
+            $.map data, 
+              (item) -> $('<span>'+item+'</span><br/>').appendTo $('#results')   

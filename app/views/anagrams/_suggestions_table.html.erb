@@ -1,35 +1,33 @@
 <table>
   <tr>
-   <td> Anagrams </td>
-   <%- @suggestions['anagrams'].each  do |a| %>
-      <td> <%=a%> </td>
-   <%- end %>
+     <td> Anagrams </td>
+     <%- @suggestions['anagrams'].each  do |a| %>
+        <td> <%=a%> </td>
+     <%- end %>
   </tr>
+
   <tr>
-   <td> Shortened words </td>
-  <%- if @word.length > MAX_WORD_FOR_SHORTEN %>
-  <tr> <td colspan='4'> 
-  	   Word length for shortening limited to <%= MAX_WORD_FOR_SHORTEN %>
-  	   <%=@word[0,MAX_WORD_FOR_SHORTEN]%>
-  	</td></tr>
-  <%-end%>
+   <td> Shorten</td>
    <%- @suggestions['shorten'].each_with_index  do |a,i| %>
       <td> <%=a%> </td>
-      <%- if i%10 == 9 %>
+      <%- if i%5 == 4 %>
           </tr><tr><td></td>
-          <%- end %>
+      <%- end %>
    <%- end %>
   </tr>
+
   <tr>
    <td> Add one Letter: </td>
-  </tr><tr>
+  </tr>
+
+  <tr>
    <%- @suggestions['addone'].each_pair  do |letter, words| %>
       <td> --<%= letter %>-- </td>
       <%- words.each_with_index do |w,i|  %>
         <td> <%=w%></td>
-        <%- if i%10 == 9 %>
-          </tr><tr><td></td>
-          <%- end %>
+        <%- if i%5 == 4 %>
+          </tr><tr><td>.</td>
+        <%- end %>
       <%- end %> 
       </tr>
       <tr> 
