@@ -22,14 +22,9 @@ jQuery ->
         pagesize: 20
         dictionary: $('#DICTIONARY').text()
       success: (data) ->
-        if word_service() != 'suggestions'
-          msg = data
-          $('#results').addClass 'hide'
-        else
-          msg = [label: 'See Below']
           $('#results').removeClass('hide').html('')
           $(data).appendTo $('#results')
-        response msg  
+        response []  
   $('#device').text 'on your ' + agent
   $('#word').autocomplete
     source: (request,response) -> ajax_call request, response
