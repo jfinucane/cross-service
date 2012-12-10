@@ -1,28 +1,24 @@
-<h3> Enter a word 
-	<span id='device'></span>
-</h3>
-
-<div style="width: 450px, height: 200px">
-
-<div >
-<select id='word_service', style='font-size: 140%'>
-  <option value='anagrams'  selected='selected'> Anagrams ( use ? for wildcard) </option>
-  <option value='startswith'> Starts with</option>
-  <option value='contains'> Contains </option>
-  <option value='suggestions'> Scrabble Suggestions</option>
-  <option value='autocomplete'> Autocomplete </option>
-  <option value='autospell'> Autocompelete with spell check</option>
-  <option value='levenhood'> Levenshtein words </options>
-</select>
-</div>
+<div class='center'>
+  <h2> Enter a word  </h2>
   
- <div class="ui-widget" >
-    <input style='width: 230px; border: 2px black solid;' id="word" />
-</div> <br/>
+  <select id='word_service', style='font-size: 20px; border-color:#999'>
+    <option value='anagrams'  selected='selected'>
+                                  Anagrams(wildcard is ?) </option>
+    <option value='startswith'>   Starts with</option>
+    <option value='contains'>     Contains </option>
+    <option value='suggestions'>  Scrabble Suggestions</option>
+    <option value='autocomplete'> Autocomplete </option>
+    <option value='autospell'>    Autocomplete spell help</option>
+    <option value='levenhood'>    Levenshtein words </options>
+  </select>
+	  
+  <div class="ui-widget" >
+    <input style='width: 250px; border: 2px black solid; font-size: 20px' id="word" />
+  </div> <br/>
 
 
- <div id="results" style=" width: 400px; overflow: auto; margin-top: 2em; font-family: Arial;" class="ui-widget-content"></div> 
+  <div id="results" style=" width: 400px; overflow: auto; margin-top: 2em; font-family: Arial;" class="ui-widget-content"></div> 
 
-<br/> <br/>  <a href='/words/api_docs'> About </a>
+  <br/> <br/>  <a href='/words/api_docs'> About </a>
 <%= javascript_include_tag "autocompletions" %>
 
