@@ -19,10 +19,10 @@ File.open('dictionaries/popular.txt','r') do |a|
 end
 
 @popular_and_in_sowpods = @pops.each_key.select do |w| 
-  (w.length > 2) && (@sowpods.include? w)
+  (w.length == 2) && (@sowpods.include? w)
 end 
 
-@start = (REDIS.get 'wildcard2').to_i
+@start = (REDIS.get 'wildcard2a').to_i
 @i = 0 
 @dictionary=Dictionary.find_by_name('sowpops')
 @log_file = File.open('./log/tempxx', 'w')
@@ -40,8 +40,7 @@ def load_wildcard2
         Wildcards.create(temp+ '**', [word], @dictionary.id) 
     	} 
     }
-    REDIS.incr 'wildcard2'
+    REDIS.incr 'wildcard2a'
     puts "#{@i}, #{word} was updated, #{Time.now}" if @i%1000 == 0
-    #break if @i > 4
   end
 end
