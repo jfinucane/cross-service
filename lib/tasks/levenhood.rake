@@ -23,6 +23,12 @@ task :load_wildcards2 => :environment do
   load_wildcard2
 end
 
+task :load_wildcards3 => :environment do
+  require './dictionaries/load_wildcard3.rb'
+  puts 'wildcards**'
+  load_wildcard3
+end
+
 task :load_leven_add_transpose => :environment do
   require './dictionaries/load_leven_add_transposes.rb'
   puts 'adds transposes to levenshtein neighborhood'
