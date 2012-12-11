@@ -3,11 +3,11 @@ module ApplicationHelper
   	if item_count < 10
       @cols = 1
     elsif item_length < 5
-      @cols = 7
+      @cols = 6
     elsif item_length < 8
-      @cols =5
+      @cols =4
     else
-      @cols = 3
+      @cols = 2
     end
   end
 end

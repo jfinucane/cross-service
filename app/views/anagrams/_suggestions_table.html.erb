@@ -1,8 +1,11 @@
 <table>
   <tr>
      <td> Anagrams </td>
-     <%- @suggestions['anagrams'].each  do |a| %>
+     <%- @suggestions['anagrams'].each_with_index  do |a,i| %>
         <td> <%=a%> </td>
+        <%- if i%4 == 3 %>
+          </tr><tr><td></td>
+        <%- end %>
      <%- end %>
   </tr>
 
@@ -10,7 +13,7 @@
    <td> Shorten</td>
    <%- @suggestions['shorten'].each_with_index  do |a,i| %>
       <td> <%=a%> </td>
-      <%- if i%5 == 4 %>
+      <%- if i%4 == 3 %>
           </tr><tr><td></td>
       <%- end %>
    <%- end %>
@@ -25,8 +28,8 @@
       <td> --<%= letter %>-- </td>
       <%- words.each_with_index do |w,i|  %>
         <td> <%=w%></td>
-        <%- if i%5 == 4 %>
-          </tr><tr><td>.</td>
+        <%- if i%4 == 3 %>
+          </tr><tr><td></td>
         <%- end %>
       <%- end %> 
       </tr>
