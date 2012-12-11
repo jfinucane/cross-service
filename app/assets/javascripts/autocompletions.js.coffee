@@ -22,17 +22,15 @@ jQuery ->
         pagesize: 20
         dictionary: $('#DICTIONARY').text()
       success: (data) ->
-          $('#results').removeClass('hide').html('')
-          $(data).appendTo $('#results')
-        response []  
-  $('#device').text 'on your ' + agent
+          $('#results').removeClass('hide').html(data)
+          response []  
   $('#word').autocomplete
     source: (request,response) -> ajax_call request, response
     minLength: 2,
     select: (event,ui) -> $('#word').attr 'value', this.value
 
   $('#word_service').change () ->
-      word = word = $('#word').attr('value')  
+      word = $('#word').attr('value')  
       return if word.length < 2
       $.ajax 
         url: build_url word
@@ -42,10 +40,6 @@ jQuery ->
           pagesize: 20,
           dictionary: $('DICTIONARY').text()
         success: (data) ->
-          $('#results').removeClass('hide').html('')
-          if word_service() == 'suggestions'
-            console.log data 
-            $(data).appendTo $('#results')
-          else
-            $.map data, 
-              (item) -> $('<span>'+item+'</span><br/>').appendTo $('#results')   
+          $('#results').removeClass('hide').html(data)
+          
+      

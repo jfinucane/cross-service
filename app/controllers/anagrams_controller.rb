@@ -2,27 +2,8 @@ require 'redis'
 class AnagramsController < ApplicationController
 require 'suggestions.rb'
 include Suggestions
+include ApplicationHelper
 before_filter :validate_dictionary
-
-  # GET /anagrams
-  # GET /anagrams.json
-  def showdb
-    sorted = Word.where(:processed => 1, 
-      :word => @anagrams['sorted_word'], 
-      :dictionary_id => @dictionary.id).limit(1)
-    sorted_id = sorted.first.id if sorted.count > 0
-    if sorted_id
-       anagrams = Anagram.where(:sorted_id => sorted_id)
-       @anagrams['words'] = anagrams.map{|anagram|  Word.find_by_id(anagram.word_id).word }
-       @anagrams[:status] = 'success'    
-    else
-       @anagrams[:status] = 'no anagrams found'
-    end
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: callback(@anagrams), layout:false }
-    end
-  end
 
   # POST /anagrams
   # POST /anagrams.json
@@ -42,7 +23,6 @@ before_filter :validate_dictionary
     end
   end
 
-
   def word_list wildcard
     result = JSON.parse(wildcard.words)
     result.to_a[100] = " -#{result.count-100} more" if result.count > 100 
@@ -50,14 +30,17 @@ before_filter :validate_dictionary
   end
 
   # GET /anagrams.json/word
-  def show
-    no_result_found =  ["No anagrams for #{@anagrams[:word]}"]  
+  def show 
     word = @anagrams[:sorted_word]
     wc = Wildcards.find_by_word(word)
-    @js = wc ? word_list(wc) : no_result_found
+    @js = wc ? word_list(wc) : []
+    @cols = column_count @js.count, @word.length
+    @method = 'Anagrams'
+    self.formats=[:html]
+    partial = render_to_string(:partial=>'layouts/plain') if params[:callback]
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: callback(@js), layout:false }
+      format.json { render json: callback_or_list(@js, partial), layout:false }
     end
   end   
 

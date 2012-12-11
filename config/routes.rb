@@ -22,8 +22,6 @@ Testgen::Application.routes.draw do
   get "/:id", :controller => 'autocompletions',   :action=>'autospell',:constraints => {:subdomain => /autospell.*/}
   get "/:id", :controller => 'levenhoods',   :action=>'show',:constraints => {:subdomain => /levenhood.*/}
 
-  get 'anagrams/showdb'
-
   get 'words/api'
 
   get 'words/api_docs'

@@ -4,7 +4,5 @@
 Anagrams for: <%= @word %>: <br/><br/>
 Dictionary: <%= @dictionary.name %><br/><br/>
 
-<%- @js.each do |word| %>
-
-   <%= word %>    <br/> <br/>
- <%- end  %>
+<%= render :partial=> 'layouts/plain'
+  

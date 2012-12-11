@@ -64,28 +64,6 @@ describe AnagramsController do
     end 
   end
 
-  describe '#showdb' do
-    it 'should find anagrams' do
-      word='tea'
-      response = Curl.get HOST+ "/anagrams/showdb.json?word=#{word}&dictionary=test"
-      response.parsed['words'].sort.should eq(['ate', 'eat', 'tea'])
-    end
-
-    it 'should find anagrams for a scrambled word' do
-      my_word = 'encyclopedia'
-      my_scrambled_word = my_word[2, my_word.size] + my_word[0,2]
-      @args = {:dictionary=>'test', :word=> my_word}
-      update =Curl.post HOST+'/anagrams.json', @args
-      response = Curl.get HOST + "/anagrams/showdb.json?word=#{my_scrambled_word}&dictionary=test"
-      response.parsed['words'].should eq([my_word])
-    end
-    it 'should not find anagrams for a fake word' do
-      my_word = 'encyclopedia' + 'xxxx'
-      response = Curl.get HOST + "/anagrams/showdb.json?word=#{my_word}&dictionary=test"
-      response.parsed['words'].should be_nil
-    end
-  end
-
   describe '#suggestions' do
     describe 'should make suggestions in addition to anagrams, ' do
       it 'should respond with a hash' do

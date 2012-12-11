@@ -1,0 +1,17 @@
+
+ <%- if @js.count == 0 %>
+     No <%=@method %> for <%= @anagrams[:word] %>   
+<%- else %>
+  <table><tr> 
+  <%- @js.each_with_index do |word,i| %>
+    <%- if i>0 && ( i % @cols == 0 || word =~/-/) %>
+      </tr><tr> 
+    <%- end %>   
+    <td> <%= word %> </td>
+    <%- if word =~/-/ %>
+      </tr><tr>
+    <%- end %>
+  <%- end  %>
+  
+  </tr></table>  
+<%- end %>
