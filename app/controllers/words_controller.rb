@@ -1,6 +1,7 @@
 class WordsController < ApplicationController
   require 'response_parser'
   include ResponseParser
+  include ApplicationHelper
   before_filter :validate_dictionary
 
   def get_page words, params
@@ -65,9 +66,14 @@ class WordsController < ApplicationController
     @prefix = params[:id].downcase.gsub(/\*/,'')
     @words = dictionary_words.where('word like ?', @prefix + '%')
     @page = get_page @words, params
+    @cols = column_count @page.count, 10
+    @method = 'StartsWith'
+    self.formats=[:html]
+    @js = @page
+    partial = render_to_string(:partial=>'layouts/plain') if params[:callback]
     respond_to do |format|
       format.html # startswith.html.erb
-      format.json { render json: callback(@page) }
+      format.json { render json: callback_or_list(@page, partial) }
     end
   end
 
@@ -75,9 +81,14 @@ class WordsController < ApplicationController
     @prefix = params[:id].downcase.gsub(/\*/,'')
     @words = dictionary_words.where('word like ?', '%' + @prefix + '%')
     @page = get_page @words, params
+    @cols = column_count @page.count, 10
+    @method = 'Contains'
+    self.formats=[:html]
+    @js = @page
+    partial = render_to_string(:partial=>'layouts/plain') if params[:callback]
     respond_to do |format|
       format.html # startswith.html.erb
-      format.json { render json:  callback(@page) }
+      format.json { render json:  callback_or_list(@page,partial) }
     end
   end
 

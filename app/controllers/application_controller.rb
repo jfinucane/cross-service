@@ -15,6 +15,15 @@ class ApplicationController < ActionController::Base
       js.to_json
     end
   end
+
+  def callback_or_list js, partial 
+    cb = params['callback']
+    if cb
+      cb + '(' + partial.to_json + ')' 
+    else 
+      js.to_json
+    end
+  end
   
   def sort_chars word
 	  word.chars.sort.join('')    

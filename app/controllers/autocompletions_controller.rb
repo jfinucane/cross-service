@@ -1,5 +1,5 @@
 class AutocompletionsController < ApplicationController
-
+  include ApplicationHelper
   before_filter :validate_dictionary
   # GET /autocompletions
   # GET /autocompletions.json
@@ -18,9 +18,13 @@ class AutocompletionsController < ApplicationController
     @prefix = params[:id].downcase.gsub(/\*/,'')
     @autocompletion = Autocompletion.find_by_prefix_and_dictionary_id(@prefix, @dictionary.id)
     @js = @autocompletion  && JSON.parse(@autocompletion.try(:words)) ||[]
+    @cols = column_count @js.count, 20
+    @method = 'Autocompletions'
+    self.formats=[:html]
+    partial = render_to_string(:partial=>'layouts/plain') if params[:callback]
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: callback(@js) }
+      format.json { render json: callback_or_list(@js, partial), layout:false }
     end
   end
 
@@ -42,10 +46,15 @@ class AutocompletionsController < ApplicationController
       spell_completions = JSON.parse(auto[:words]) 
       completions <<  ' - did you mean -' 
       completions += spell_completions.map{|score|score[1]}
-    end
+    end 
+    @js = completions
+    @cols = 3
+    @method = 'Autocompletions/Spelling suggestions'
+    self.formats=[:html]
+    partial = render_to_string(:partial=>'layouts/plain') if params[:callback]
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: callback(completions) }
+      format.json { render json: callback_or_list(@js, partial), layout:false }
     end
   end
 
