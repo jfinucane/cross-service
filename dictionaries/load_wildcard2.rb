@@ -19,7 +19,7 @@ File.open('dictionaries/popular.txt','r') do |a|
 end
 
 @popular_and_in_sowpods = @pops.each_key.select do |w| 
-  (w.length == 2) && (@sowpods.include? w)
+  (w.length >= 2) && (@sowpods.include? w)
 end 
 
 @start = (REDIS.get 'wildcard2a').to_i
