@@ -7,6 +7,9 @@ agent = 'android' if a.match(/android/i)
 agent = 'iphone' if a.match(/iphone/i)
   
 jQuery ->
+  change_word = (x) -> 
+    console.log 'The word is -'+x.trim()+'-'
+    $('#word').val x.trim()
   $("#results").addClass 'hide'
   HOST = $('#PLATFORM_HOST').text().replace(/^\s*/,'').replace(/\n/,'');
   word_service = () ->
@@ -23,6 +26,7 @@ jQuery ->
         dictionary: $('#DICTIONARY').text()
       success: (data) ->
           $('#results').removeClass('hide').html(data)
+          $('td').click () ->  change_word(this.innerHTML)
           response []  
   $('#word').autocomplete
     source: (request,response) -> ajax_call request, response
@@ -41,5 +45,7 @@ jQuery ->
           dictionary: $('DICTIONARY').text()
         success: (data) ->
           $('#results').removeClass('hide').html(data)
-          
-      
+          $('td').click () ->  change_word(this.innerHTML)
+  
+
+     
