@@ -55,7 +55,7 @@ describe AnagramsController do
     it 'should not find anagrams for an unknown letter combination' do
       word='txn'
       response = Curl.get @host+ "#{word}.json?dictionary=test"
-      response.parsed[0].should  match(/No anagrams/)
+      response.parsed.count.should  == 0
     end
     it 'should find anagrams even if letters are out of order' do
       word='aet'
