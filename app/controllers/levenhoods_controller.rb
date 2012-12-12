@@ -9,7 +9,7 @@ class LevenhoodsController < ApplicationController
     @levenhood = Levenhood.find_by_neighbor_and_dictionary_id(neighbor, @dictionary.id)
     @js = @levenhood && JSON.parse(@levenhood.try(:words)) || []
     @cols = column_count @js.count, @word.length
-    @method = 'Levenshtein Neighborhoods'
+    @method = 'Spelling help'
     self.formats=[:html]
     partial = render_to_string(:partial=>'layouts/plain') if params[:callback]
     respond_to do |format|

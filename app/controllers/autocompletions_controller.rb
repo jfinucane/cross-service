@@ -44,7 +44,7 @@ class AutocompletionsController < ApplicationController
     auto = spell_dict && Autocompletion.find_by_prefix_and_dictionary_id(@prefix, spell_dict.id)
     if auto
       spell_completions = JSON.parse(auto[:words]) 
-      completions <<  ' - did you mean -' 
+      completions <<  ' -maybe?-' 
       completions += spell_completions.map{|score|score[1]}
     end 
     @js = completions
