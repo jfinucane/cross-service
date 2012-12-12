@@ -1,15 +1,26 @@
-<% page = request.env['REQUEST_PATH'] %>
-<%- unless page =~ /api/ %>
+<%- path = request.env['REQUEST_PATH'] %>
 
+<%- page = case path
+  when /about/
+    'about'
+  when /help/
+    'help'
+  else
+    'api'
+  end %>
+
+
+
+<%-  unless page == 'api' %>
       <a href='/words/api'> Return </a>
 <%- end 
-    unless page =~ /about/ %>
+    unless page == 'about' %>
       &nbsp; <a href='/words/about'>About</a>  
 <%- end 
-    unless page =~ /help/ %>
+    unless page == 'help' %>
       &nbsp; <a href='/words/help'>Help</a> 
 <%- end
-  unless page =~ /api/ %>
+  unless page == 'api' %>
      <br/><br/>
     Contact: jamesfinucane at gmail.com  
    
