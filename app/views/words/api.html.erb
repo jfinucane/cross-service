@@ -1,15 +1,15 @@
-<div class='center'>
+
   <h2> Enter a word  </h2>
   
   <select id='word_service', style='font-size: 20px; border-color:#999'>
     <option value='anagrams'  selected='selected'>
                                   Anagrams (use ? for wildcard) </option>
-    <option value='startswith'>   Starts with</option>
-    <option value='contains'>     Contains </option>
     <option value='suggestions'>  Scrabble Suggestions</option>
     <option value='autocomplete'> Autocomplete </option>
     <option value='autospell'>    Autocomplete spell help</option>
-    <option value='levenhood'>    One letter difference </options>
+    <option value='levenhood'>    Full word spell help </options>
+    <option value='startswith'>   Starts with</option>
+    <option value='contains'>     Contains </option>
   </select>
 	  
   <div class="ui-widget" >
@@ -19,11 +19,6 @@
   <div 
      class="ui-corner-all" id="results" style="width: 350px; overflow: auto; margin-top: 2em; font-size: 18px; z-index: 2; border: 1px black solid; margin: 0px; padding: 0px">
 </div> 
-  
-
-
- 
-
-  <br/> <br/>  <a href='/words/api_docs'> About </a>
+<br/><br/> 
 <%= javascript_include_tag "autocompletions" %>
 

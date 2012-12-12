@@ -1,0 +1,17 @@
+<% page = request.env['REQUEST_PATH'] %>
+<%- unless page =~ /api/ %>
+
+      <a href='/words/api'> Return </a>
+<%- end 
+    unless page =~ /about/ %>
+      &nbsp; <a href='/words/about'>About</a>  
+<%- end 
+    unless page =~ /help/ %>
+      &nbsp; <a href='/words/help'>Help</a> 
+<%- end
+  unless page =~ /api/ %>
+     <br/><br/>
+    Contact: jamesfinucane at gmail.com  
+   
+
+<%- end %>
