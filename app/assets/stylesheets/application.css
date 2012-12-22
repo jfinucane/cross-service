@@ -9,3 +9,24 @@
 table {
   font-size: 20px;
 }
+.pale {
+  color: #00f;	
+  background-color: #ff4;
+}
+.hidden {
+  display:none;
+}
+#word {
+  width: 300px;
+  border: 2px black solid;
+  font-size: 20px;
+}
+#results {
+	width: 350px;
+	overflow: auto;
+	margin-top: 2em; 
+	font-size: 18px; 
+	z-index: 2;
+	border: 1px black solid; margin: 0px; 
+	padding: 0px
+}
