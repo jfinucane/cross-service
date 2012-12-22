@@ -5,7 +5,9 @@ jQuery ->
   build_url = (term) ->
     gterm = term.replace(/\?/g, '*')
     url = 'http://' + word_service() + '.' + HOST + '/' + gterm + '.json'
-
+  f1 = () -> $(this).addClass('pale')
+  f2 = () -> $(this).removeClass('pale')
+          
   look_up = () -> 
     word = $('#word').attr('value')
     if word.length > 0
@@ -22,6 +24,7 @@ jQuery ->
       success: (data) ->
         $('#results').removeClass('hide').html(data)
         $('td').click () ->  change_word(this.innerHTML)
+        $('td').hover f1, f2 
 
   change_word = (x) -> 
     word = x.trim()
