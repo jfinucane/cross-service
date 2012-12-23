@@ -8,6 +8,7 @@ class LevenhoodsController < ApplicationController
     neighbor = params[:id].downcase.gsub(/\*/,'')
     @levenhood = Levenhood.find_by_neighbor_and_dictionary_id(neighbor, @dictionary.id)
     @js = @levenhood && JSON.parse(@levenhood.try(:words)) || []
+    @js << neighbor if Word.find_by_word_and_dictionary_id(neighbor, @dictionary.id)
     @cols = column_count @js.count, @word.length
     @method = 'Spelling help'
     self.formats=[:html]

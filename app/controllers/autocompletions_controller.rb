@@ -12,12 +12,19 @@ class AutocompletionsController < ApplicationController
     end
   end
 
+  def get_autocomplete params
+    @prefix = params[:id].downcase.gsub(/\*/,'')
+    word = Word.find_by_word_and_dictionary_id(@prefix, @dictionary.id)
+    completions = @good_word = word && [word.word] || []
+    @autocompletion = Autocompletion.find_by_prefix_and_dictionary_id(@prefix, @dictionary.id)
+    completions += JSON.parse(@autocompletion.words) if @autocompletion
+    completions
+  end
+
   # GET /autocompletions/1
   # GET /autocompletions/1.json
   def show
-    @prefix = params[:id].downcase.gsub(/\*/,'')
-    @autocompletion = Autocompletion.find_by_prefix_and_dictionary_id(@prefix, @dictionary.id)
-    @js = @autocompletion  && JSON.parse(@autocompletion.try(:words)) ||[]
+    @js = get_autocomplete params
     @cols = column_count @js.count, 20
     @method = 'Autocompletions'
     self.formats=[:html]
@@ -31,10 +38,7 @@ class AutocompletionsController < ApplicationController
   # GET /autocompletions/1
   # GET /autocompletions/1.json
   def autospell
-    @prefix = params[:id].downcase.gsub(/\*/,'')
-    autocompletion = Autocompletion.find_by_prefix_and_dictionary_id(@prefix, @dictionary.id)
-    completions = []
-    completions += JSON.parse(autocompletion[:words]) if autocompletion
+    completions = get_autocomplete params
     if @dictionary.name == 'sowpods'
       spell_dict_name = 'sowpops_with_spellcheck'
     else
@@ -45,7 +49,7 @@ class AutocompletionsController < ApplicationController
     if auto
       spell_completions = JSON.parse(auto[:words]) 
       completions <<  ' -maybe?-' 
-      completions += spell_completions.map{|score|score[1]}
+      completions += spell_completions.map{|score|score[1]} - @good_word
     end 
     @js = completions
     @cols = 3
